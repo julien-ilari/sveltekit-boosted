@@ -17,14 +17,15 @@
 
 <Button on:mousedown={handleClick}>
 	<Icon class="material-icons">thumb_up</Icon>
-	<Label>Click Me</Label>
+	<Label>Cliquez moi !</Label>
 </Button>
 <p class="mdc-typography--body1">
 	{#if clicked}
-		You've clicked the button {clicked} time{clicked === 1 ? '' : 's'}. You can
-		<a on:click={reset} href="javascript:void(0);">reset it</a>.
+		Vous avez cliqué sur le bouton {clicked} fois{clicked === 1 ? '' : 's'}. Vous pouvez
+		<!-- svelte-ignore a11y-invalid-attribute -->
+		<a on:click={reset} href="javascript:void(0);">le réinitialiser</a>.
 	{:else}
-		<span class="grayed">You haven't clicked the button.</span>
+		<span class="grayed">Vous n'avez pas cliqué sur le bouton.</span>
 	{/if}
 </p>
 
