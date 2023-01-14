@@ -32,6 +32,11 @@
 			<Title>Mon application</Title>
 		</Section>
 		<Section align="end" toolbar>
+			<div class="container">
+				<Button on:click={switchTheme}>
+					<Label>{lightTheme ? 'Lights off' : 'Lights on'}</Label>
+				</Button>
+			</div>
 			<IconButton aria-label="GitHub" href="https://github.com/hperrin/svelte-material-ui">
 				<Icon component={Svg} viewBox="0 0 24 24">
 					<path fill="currentColor" d={mdiGithub} />
@@ -48,11 +53,6 @@
 
 
 
-<AutoAdjust {topAppBar} style="display: flex; justify-content: space-between;">
-	<div class="container"><slot /></div>
-	<div class="container">
-		<Button on:click={switchTheme}>
-			<Label>{lightTheme ? 'Lights off' : 'Lights on'}</Label>
-		</Button>
-	</div>
+<AutoAdjust {topAppBar} style="display: flex; flex-direction: column;">
+	<main class="container"><slot /></main>
 </AutoAdjust>
