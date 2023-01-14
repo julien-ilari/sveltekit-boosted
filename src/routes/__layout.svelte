@@ -29,7 +29,7 @@
 <TopAppBar bind:this={topAppBar} variant="standard">
 	<Row>
 		<Section>
-			<Title>My App</Title>
+			<Title>Mon application</Title>
 		</Section>
 		<Section align="end" toolbar>
 			<IconButton aria-label="GitHub" href="https://github.com/hperrin/svelte-material-ui">
