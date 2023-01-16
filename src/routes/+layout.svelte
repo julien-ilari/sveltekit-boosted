@@ -63,10 +63,12 @@
 		<div id="bottom-bar">
 			<BottomAppBar variant="static">
 				<Section>
-					<IconButton class="material-icons" aria-label="Archive">archive</IconButton>
-					<IconButton class="material-icons" aria-label="Mark unread">mail</IconButton>
-					<IconButton class="material-icons" aria-label="Label">label</IconButton>
-					<IconButton class="material-icons" aria-label="Trash">delete</IconButton>
+					<div class="flexy">
+						<IconButton class="material-icons" aria-label="Archive">archive</IconButton>
+						<IconButton class="material-icons" aria-label="Mark unread">mail</IconButton>
+						<IconButton class="material-icons" aria-label="Label">label</IconButton>
+						<IconButton class="material-icons" aria-label="Trash">delete</IconButton>
+					</div>
 				</Section>
 			</BottomAppBar>
 		</div>
@@ -80,7 +82,6 @@
 
 	.bottom-app-bar-container {
 		width: 100%;
-		
 		margin: 0;
 		overflow: auto;
 		display: inline-block;
@@ -89,7 +90,7 @@
 	@media (max-width: 480px) {
 		#bottom-bar {
 			display: block;
-			position: absolute;
+			position: fixed;
 			bottom: 0;
 			width: 100%;
 		}
@@ -102,6 +103,12 @@
 	.flexy {
 		display: flex;
 		flex-wrap: wrap;
+		justify-content: space-between;
+		align-content: space-between;
+		flex-direction: row;
+		align-items: stretch;
+		width: -moz-available; 
+		width: -webkit-fill-available;
 	}
 
 	.flexor {

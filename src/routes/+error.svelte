@@ -1,8 +1,7 @@
 <script>
-
-	import Button, { Label } from "@smui/button";
-
+	import Button, { Label } from '@smui/button';
 </script>
+
 <div style="margin:auto;width: 100%;">
 	<div id="background" />
 	<div class="top">
@@ -27,9 +26,9 @@
 	</div>
 	<div class="bottom">
 		<p>
-            Boo, looks like a ghost stole this page! <br />
-            Boo, il semblerait qu'un fantôme a volé cette page !
-        </p>
+			Boo, looks like a ghost stole this page! <br />
+			Boo, il semblerait qu'un fantôme a volé cette page !
+		</p>
 		<div class="buttons">
 			<Button class="btn" href="/"><Label>Back</Label></Button>
 			<Button class="btn" href="/"><Label>Home</Label></Button>
@@ -45,6 +44,26 @@
 	@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Lato');
 	.top {
 		margin-top: 30px;
+	}
+
+	@media (max-width: 480px) {
+		.top {
+			margin-top: 0rem !important;
+		}
+		.container {
+			width: 125px !important;
+			height: 125px !important;
+		}
+
+		h1 {
+			font-size: 4.5em !important;
+		}
+
+		h3 {
+			font-size: 1.2em !important;
+			margin-top: -10px !important;
+			font-weight: 900 !important;
+		}
 	}
 
 	.container {
@@ -219,22 +238,6 @@
 		margin-top: 10px;
 	}
 
-	.btn {
-		background: #ededed;
-		padding: 15px 20px;
-		margin: 5px;
-		color: #585959;
-		font-family: 'Lato', sans-serif;
-		text-transform: uppercase;
-		font-size: 0.6em;
-		letter-spacing: 1px;
-		border: 0;
-	}
-	.btn:hover {
-		background: #bfc0c0;
-		transition: all 0.4s ease-out;
-	}
-
 	footer {
 		position: absolute;
 		bottom: 0;
@@ -247,10 +250,12 @@
 		letter-spacing: 3px;
 		font-family: 'Lato', sans-serif;
 	}
+
 	footer a {
 		color: #ffffff;
 		text-decoration: none;
 	}
+
 	footer a:hover {
 		color: #7d7d7d;
 	}

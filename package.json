@@ -2,6 +2,7 @@
 	"name": "smui-example-sveltekit",
 	"version": "0.0.1",
 	"scripts": {
+		"start" : "vite",
 		"dev": "vite dev",
 		"build": "vite build",
 		"package": "svelte-kit package",
@@ -20,7 +21,9 @@
 		"@mdi/js": "^7.0.96",
 		"@smui-extra/bottom-app-bar": "^7.0.0-beta.0",
 		"@smui/button": "^6.1.4",
+		"@smui/drawer": "^7.0.0-beta.0",
 		"@smui/icon-button": "^6.0.0",
+		"@smui/list": "^7.0.0-beta.0",
 		"@smui/top-app-bar": "^6.0.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
