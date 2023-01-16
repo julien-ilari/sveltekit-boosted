@@ -2,14 +2,12 @@
 	"name": "smui-example-sveltekit",
 	"version": "0.0.1",
 	"scripts": {
-		"start" : "vite",
+		"start": "vite",
 		"dev": "vite dev",
 		"build": "vite build",
 		"package": "svelte-kit package",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync && npm run smui-theme-light && npm run smui-theme-dark",
-		"smui-theme-light": "smui-theme compile static/smui.css -i src/theme",
-		"smui-theme-dark": "smui-theme compile static/smui-dark.css -i src/theme/dark",
+		"prepare": "svelte-kit sync",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. .",
@@ -19,17 +17,11 @@
 		"@material/theme": "^13.0.0",
 		"@material/typography": "^13.0.0",
 		"@mdi/js": "^7.0.96",
-		"@smui-extra/bottom-app-bar": "^7.0.0-beta.0",
-		"@smui/button": "^6.1.4",
-		"@smui/drawer": "^7.0.0-beta.0",
-		"@smui/icon-button": "^6.0.0",
-		"@smui/list": "^7.0.0-beta.0",
-		"@smui/top-app-bar": "^6.0.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"prettier": "^2.7.1",
 		"prettier-plugin-svelte": "^2.7.0",
-		"smui-theme": "^6.0.0",
+		"sass": "^1.57.1",
 		"svelte": "^3.49.0",
 		"svelte-check": "^2.8.0",
 		"svelte-preprocess": "^4.10.7",
@@ -38,6 +30,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@sentry/node": "^7.30.0"
+		"@popperjs/core": "^2.11.6",
+		"@sentry/node": "^7.30.0",
+		"boosted": "^5.2.3"
 	}
 }

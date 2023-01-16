@@ -1,7 +1,3 @@
-<script>
-	import Button, { Label } from '@smui/button';
-</script>
-
 <div style="margin:auto;width: 100%;">
 	<div id="background" />
 	<div class="top">
@@ -30,13 +26,13 @@
 			Boo, il semblerait qu'un fantôme a volé cette page !
 		</p>
 		<div class="buttons">
-			<Button class="btn" href="/"><Label>Back</Label></Button>
-			<Button class="btn" href="/"><Label>Home</Label></Button>
+			<button class="btn btn-primary">Back</button>
+			<button class="btn btn-secondary">Home</button>
 		</div>
 	</div>
 
 	<footer>
-		<p>made by <a href="https://codepen.io/juliepark"> julie</a> ♡</p>
+		
 	</footer>
 </div>
 
@@ -47,14 +43,6 @@
 	}
 
 	@media (max-width: 480px) {
-		.top {
-			margin-top: 0rem !important;
-		}
-		.container {
-			width: 125px !important;
-			height: 125px !important;
-		}
-
 		h1 {
 			font-size: 4.5em !important;
 		}
