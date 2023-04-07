@@ -238,13 +238,4 @@
 		letter-spacing: 3px;
 		font-family: 'Lato', sans-serif;
 	}
-
-	footer a {
-		color: #ffffff;
-		text-decoration: none;
-	}
-
-	footer a:hover {
-		color: #7d7d7d;
-	}
 </style>
