@@ -1,0 +1,1142 @@
+@font-face {
+	font-family: 'OceanFont';
+	src: url('../fonts/OceanFont.ttf?rzoeeo') format('truetype'), url('../fonts/OceanFont.woff?rzoeeo') format('woff'),
+		url('../fonts/OceanFont.svg?rzoeeo#OceanFont') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	font-display: block;
+}
+
+[class^='of-'],
+[class*=' of-'] {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: 'OceanFont';
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.of-electrical-car:before {
+	content: '\e9e2';
+}
+
+.of-thermal-car:before {
+	content: '\e9e3';
+}
+
+.of-hybrid-car:before {
+	content: '\e9e4';
+}
+
+.of-Military_19371:before {
+	content: '\e98e';
+}
+
+.of-Smart-Parking_17792:before {
+	content: '\e98f';
+}
+
+.of-Im_driving_19371:before {
+	content: '\e994';
+}
+
+.of-Track_Your_order_19371:before {
+	content: '\e999';
+}
+
+.of-IoT_Industry_19371:before {
+	content: '\e99a';
+}
+
+.of-Car-SOS-call_19371:before {
+	content: '\e99b';
+}
+
+.of-Car_location_19371:before {
+	content: '\e99c';
+}
+
+.of-Car_front1:before {
+	content: '\e99d';
+}
+
+.of-Taxi_19371:before {
+	content: '\e99e';
+}
+
+.of-On_board_unit_vehicle_19371:before {
+	content: '\e99f';
+}
+
+.of-Car_locked_19371:before {
+	content: '\e9a0';
+}
+
+.of-Agriculture_19371:before {
+	content: '\e9a1';
+}
+
+.of-Shipping_19371:before {
+	content: '\e9a2';
+}
+
+.of-Construction_19371:before {
+	content: '\e9a3';
+}
+
+.of-Smart_car_19371:before {
+	content: '\e9a4';
+}
+
+.of-Car_pool:before {
+	content: '\e9a5';
+}
+
+.of-Aeroplane_19371:before {
+	content: '\e9a6';
+}
+
+.of-Smart_Carpark_19371:before {
+	content: '\e9a7';
+}
+
+.of-Car-WiFi_19371:before {
+	content: '\e9a8';
+}
+
+.of-Airbox_Auto_19371:before {
+	content: '\e9a9';
+}
+
+.of-Crane_19371:before {
+	content: '\e9aa';
+}
+
+.of-Drive_19371:before {
+	content: '\e9ab';
+}
+
+.of-Car-status_19371:before {
+	content: '\e9ac';
+}
+
+.of-Public_Transport_19371:before {
+	content: '\e9ad';
+}
+
+.of-Car-sharing_17792:before {
+	content: '\e9ae';
+}
+
+.of-Aerial_bucket_truck:before {
+	content: '\e9af';
+}
+
+.of-Cycling_19371:before {
+	content: '\e9b0';
+}
+
+.of-connected-car_19371:before {
+	content: '\e9b1';
+}
+
+.of-Emergency-servcice_19371:before {
+	content: '\e9b2';
+}
+
+.of-IoT_Logistics_19371:before {
+	content: '\e9b3';
+}
+
+.of-Car:before {
+	content: '\e9b4';
+}
+
+.of-train_19371:before {
+	content: '\e9b5';
+}
+
+.of-Car-call_19371:before {
+	content: '\e9b6';
+}
+
+.of-Logistics_19371:before {
+	content: '\e9b7';
+}
+
+.of-Car_electric_charge:before {
+	content: '\e9b8';
+}
+
+.of-Electric_car_19371:before {
+	content: '\e9b9';
+}
+
+.of-Parking:before {
+	content: '\e9ba';
+}
+
+.of-Fast_delivery_19371:before {
+	content: '\e9bb';
+}
+
+.of-fourgon:before {
+	content: '\e9bc';
+}
+
+.of-remorque-2:before {
+	content: '\e9bd';
+}
+
+.of-chariot-elevateur:before {
+	content: '\e9be';
+}
+
+.of-marteau-piqueur:before {
+	content: '\e9bf';
+}
+
+.of-voiture:before {
+	content: '\e9c0';
+}
+
+.of-camion-benne:before {
+	content: '\e9c1';
+}
+
+.of-benne:before {
+	content: '\e9c2';
+}
+
+.of-tractopelle-2:before {
+	content: '\e9c3';
+}
+
+.of-grue:before {
+	content: '\e9c4';
+}
+
+.of-scooter:before {
+	content: '\e9c5';
+}
+
+.of-plateau-elevateur:before {
+	content: '\e9c6';
+}
+
+.of-rouleau-compresseur:before {
+	content: '\e9c7';
+}
+
+.of-pelleteuse:before {
+	content: '\e9c8';
+}
+
+.of-camion-remorque:before {
+	content: '\e9c9';
+}
+
+.of-remorque:before {
+	content: '\e9ca';
+}
+
+.of-moissoneuse-batteuse:before {
+	content: '\e9cb';
+}
+
+.of-remorque-plateau:before {
+	content: '\e9cc';
+}
+
+.of-pickup:before {
+	content: '\e9cd';
+}
+
+.of-pelleteuse-chenille:before {
+	content: '\e9ce';
+}
+
+.of-tracteur-2:before {
+	content: '\e9cf';
+}
+
+.of-tractopelle:before {
+	content: '\e9d0';
+}
+
+.of-fourgonette:before {
+	content: '\e9d1';
+}
+
+.of-tracteur:before {
+	content: '\e9d2';
+}
+
+.of-tractopelle-chenille:before {
+	content: '\e9d3';
+}
+
+.of-Reload_19371:before {
+	content: '\e976';
+}
+
+.of-Car_front:before {
+	content: '\e977';
+}
+
+.of-Itinerary:before {
+	content: '\e978';
+}
+
+.of-Augmented_City:before {
+	content: '\e979';
+}
+
+.of-Layers:before {
+	content: '\e97a';
+}
+
+.of-Machine_learning:before {
+	content: '\e97b';
+}
+
+.of-zoom_out_19371:before {
+	content: '\e97c';
+}
+
+.of-zoom_in_19371:before {
+	content: '\e97d';
+}
+
+.of-Warning_important_19371:before {
+	content: '\e97e';
+}
+
+.of-Trash_19371:before {
+	content: '\e97f';
+}
+
+.of-Task_list_19371:before {
+	content: '\e980';
+}
+
+.of-star_favourite_empty_19371:before {
+	content: '\e981';
+}
+
+.of-star_favourite_19371:before {
+	content: '\e982';
+}
+
+.of-Search_19371:before {
+	content: '\e983';
+}
+
+.of-Restricted_19371:before {
+	content: '\e984';
+}
+
+.of-Repair_19371:before {
+	content: '\e985';
+}
+
+.of-Power_19371:before {
+	content: '\e986';
+}
+
+.of-Pencil_19371:before {
+	content: '\e987';
+}
+
+.of-My_Account_19371:before {
+	content: '\e988';
+}
+
+.of-more_add_19371:before {
+	content: '\e989';
+}
+
+.of-Donation_19371:before {
+	content: '\e98a';
+}
+
+.of-Map_19371:before {
+	content: '\e98b';
+}
+
+.of-Location_Pin_19371:before {
+	content: '\e98c';
+}
+
+.of-Location_on_map_19371:before {
+	content: '\e98d';
+}
+
+.of-Info_19371:before {
+	content: '\e990';
+}
+
+.of-File_download_19371:before {
+	content: '\e991';
+}
+
+.of-Digital-reading_19371:before {
+	content: '\e992';
+}
+
+.of-Car-route_19371:before {
+	content: '\e993';
+}
+
+.of-Auditorium_19371:before {
+	content: '\e995';
+}
+
+.of-Alarm_clock_19371:before {
+	content: '\e996';
+}
+
+.of-Adult_19371:before {
+	content: '\e997';
+}
+
+.of-Administrator_19371:before {
+	content: '\e998';
+}
+
+.of-assistance:before {
+	content: '\e973';
+}
+
+.of-control_centre:before {
+	content: '\e974';
+}
+
+.of-key:before {
+	content: '\e975';
+}
+
+.of-international:before {
+	content: '\e972';
+}
+
+.of-administrator:before {
+	content: '\e970';
+}
+
+.of-my_account:before {
+	content: '\e971';
+}
+
+.of-toll-road:before {
+	content: '\e968';
+}
+
+.of-parking .path1:before {
+	content: '\e969';
+	color: rgb(0, 0, 0);
+}
+
+.of-parking .path2:before {
+	content: '\e96a';
+	margin-left: -1em;
+	color: rgb(255, 255, 255);
+}
+
+.of-parking-o:before {
+	content: '\e96b';
+}
+
+.of-parking-o-o:before {
+	content: '\e96c';
+}
+
+.of-parking-o-origin:before {
+	content: '\e96d';
+}
+
+.of-chronotachy_dispo:before {
+	content: '\e96e';
+}
+
+.of-cimetiere_2:before {
+	content: '\e95a';
+}
+
+.of-client:before {
+	content: '\e95b';
+}
+
+.of-crematorium:before {
+	content: '\e95c';
+}
+
+.of-eglise:before {
+	content: '\e95d';
+}
+
+.of-cimetiere:before {
+	content: '\e95e';
+}
+
+.of-funerarium:before {
+	content: '\e95f';
+}
+
+.of-depot:before {
+	content: '\e960';
+}
+
+.of-fournisseur:before {
+	content: '\e961';
+}
+
+.of-hotel:before {
+	content: '\e962';
+}
+
+.of-prospect:before {
+	content: '\e963';
+}
+
+.of-restaurant:before {
+	content: '\e964';
+}
+
+.of-station-service:before {
+	content: '\e965';
+}
+
+.of-bureau:before {
+	content: '\e966';
+}
+
+.of-chantier:before {
+	content: '\e967';
+}
+
+.of-benne-cluster:before {
+	content: '\e90a';
+}
+
+.of-benne-plein:before {
+	content: '\e914';
+}
+
+.of-benne-outline:before {
+	content: '\e915';
+}
+
+.of-BUC_CIRCLE:before {
+	content: '\e916';
+}
+
+.of-BUC_FORK:before {
+	content: '\e92a';
+}
+
+.of-FLAG:before {
+	content: '\e936';
+}
+
+.of-FLAG_POST:before {
+	content: '\e937';
+}
+
+.of-FLAG_POSITION:before {
+	content: '\e938';
+}
+
+.of-FLAG_GO:before {
+	content: '\e939';
+}
+
+.of-PRIVACY:before {
+	content: '\e93a';
+}
+
+.of-MAP_FILTER_SATELLITE:before {
+	content: '\e93b';
+}
+
+.of-MAP_FILTER_CARTOGRAPHY:before {
+	content: '\e93c';
+}
+
+.of-ANOMALY:before {
+	content: '\e93d';
+}
+
+.of-FUEL_PLUG:before {
+	content: '\e93e';
+}
+
+.of-FUEL_CAR:before {
+	content: '\e93f';
+}
+
+.of-FUEL:before {
+	content: '\e940';
+}
+
+.of-PND_MESSAGE:before {
+	content: '\e941';
+}
+
+.of-clusters_vhc:before {
+	content: '\e942';
+}
+
+.of-filtres-vehicules:before {
+	content: '\e943';
+}
+
+.of-POI_STOP:before {
+	content: '\e944';
+}
+
+.of-clusters_poi:before {
+	content: '\e945';
+}
+
+.of-POI_ADD:before {
+	content: '\e946';
+}
+
+.of-MAP_FILTER_POI:before {
+	content: '\e947';
+}
+
+.of-vehicules-plus-proches:before {
+	content: '\e948';
+}
+
+.of-poi-plus-proches:before {
+	content: '\e949';
+}
+
+.of-HEADER_FILTER:before {
+	content: '\e94a';
+}
+
+.of-MAP_FILTER_TOOLTIP:before {
+	content: '\e94b';
+}
+
+.of-WIFI_NULL:before {
+	content: '\e94c';
+}
+
+.of-WIFI_SETTING:before {
+	content: '\e94d';
+}
+
+.of-WIFI_LOCKED:before {
+	content: '\e94e';
+}
+
+.of-WIFI_ALERT:before {
+	content: '\e94f';
+}
+
+.of-WIFI_OFF:before {
+	content: '\e950';
+}
+
+.of-WIFI_FULL:before {
+	content: '\e951';
+}
+
+.of-MAP_FILTER_ZONES:before {
+	content: '\e952';
+}
+
+.of-poi:before {
+	content: '\e905';
+}
+
+.of-filtres-clusters:before {
+	content: '\e906';
+}
+
+.of-filtres-poi:before {
+	content: '\e907';
+}
+
+.of-filtres-carte:before {
+	content: '\e908';
+}
+
+.of-filtres-etiquette:before {
+	content: '\e909';
+}
+
+.of-filtres-zones:before {
+	content: '\e90b';
+}
+
+.of-gauche:before {
+	content: '\e90c';
+}
+
+.of-itineraire:before {
+	content: '\e90d';
+}
+
+.of-magnetoscope:before {
+	content: '\e90e';
+}
+
+.of-masquer:before {
+	content: '\e90f';
+}
+
+.of-message:before {
+	content: '\e910';
+}
+
+.of-personnes:before {
+	content: '\e911';
+}
+
+.of-play:before {
+	content: '\e912';
+}
+
+.of-rafraichir:before {
+	content: '\e917';
+}
+
+.of-recherche:before {
+	content: '\e918';
+}
+
+.of-replay:before {
+	content: '\e919';
+}
+
+.of-street-map:before {
+	content: '\e91a';
+}
+
+.of-tableau-bord-message:before {
+	content: '\e91b';
+}
+
+.of-tableau-bord-mission:before {
+	content: '\e91c';
+}
+
+.of-trajets:before {
+	content: '\e91d';
+}
+
+.of-vehicules-plus-proches_2:before {
+	content: '\e91e';
+}
+
+.of-vitesse:before {
+	content: '\e91f';
+}
+
+.of-voiture-face:before {
+	content: '\e920';
+}
+
+.of-volant:before {
+	content: '\e921';
+}
+
+.of-itineraire_droite:before {
+	content: '\e922';
+}
+
+.of-itineraire_tout_droit:before {
+	content: '\e923';
+}
+
+.of-sms:before {
+	content: '\e924';
+}
+
+.of-tri:before {
+	content: '\e925';
+}
+
+.of-afficher:before {
+	content: '\e926';
+}
+
+.of-ajouter-poi:before {
+	content: '\e927';
+}
+
+.of-back:before {
+	content: '\e928';
+}
+
+.of-cibler:before {
+	content: '\e929';
+}
+
+.of-clusters_poi_2:before {
+	content: '\e92b';
+}
+
+.of-consommation2:before {
+	content: '\e92c';
+}
+
+.of-danger:before {
+	content: '\e92d';
+}
+
+.of-deconnecte:before {
+	content: '\e92e';
+}
+
+.of-deconnection:before {
+	content: '\e92f';
+}
+
+.of-dossier:before {
+	content: '\e930';
+}
+
+.of-droite:before {
+	content: '\e931';
+}
+
+.of-duree:before {
+	content: '\e932';
+}
+
+.of-evenement:before {
+	content: '\e933';
+}
+
+.of-fermer:before {
+	content: '\e934';
+}
+
+.of-affichage:before {
+	content: '\e935';
+}
+
+.of-oxygen-tank:before {
+	content: '\e900';
+}
+
+.of-gas-cylinder-outline:before {
+	content: '\e901';
+}
+
+.of-car-in-a-gas-station:before {
+	content: '\e902';
+}
+
+.of-engine-o:before {
+	content: '\e903';
+}
+
+.of-engine:before {
+	content: '\e904';
+}
+
+.of-consommation:before {
+	content: '\e600';
+}
+
+.of-charge_moteur:before {
+	content: '\e601';
+}
+
+.of-regime_moteur:before {
+	content: '\e602';
+}
+
+.of-zones_rouges:before {
+	content: '\e603';
+}
+
+.of-acceleration:before {
+	content: '\e604';
+}
+
+.of-emissions:before {
+	content: '\e605';
+}
+
+.of-freinage:before {
+	content: '\e606';
+}
+
+.of-chronometre:before {
+	content: '\e607';
+}
+
+.of-virage:before {
+	content: '\e608';
+}
+
+.of-compteur:before {
+	content: '\e609';
+}
+
+.of-securite:before {
+	content: '\e60a';
+}
+
+.of-feuille:before {
+	content: '\e60b';
+}
+
+.of-badgeage:before {
+	content: '\e9e1';
+}
+
+.of-Guide_help:before {
+	content: '\e9dd';
+}
+
+.of-Email:before {
+	content: '\e9de';
+}
+
+.of-Three_vehicules:before {
+	content: '\e9df';
+}
+
+.of-Cest-ici:before {
+	content: '\e9e0';
+}
+
+.of-FLAG_GO_REVERSE:before {
+	content: '\e9dc';
+}
+
+.of-TypeOfVehicles:before {
+	content: '\e9d4';
+}
+
+.of-Vision:before {
+	content: '\e9d5';
+}
+
+.of-Send:before {
+	content: '\e9d6';
+}
+
+.of-PossibleItinerary:before {
+	content: '\e9d7';
+}
+
+.of-OrangeCorporate:before {
+	content: '\e9d8';
+}
+
+.of-MoreLocation:before {
+	content: '\e9d9';
+}
+
+.of-Grouping:before {
+	content: '\e9da';
+}
+
+.of-EPG:before {
+	content: '\e9db';
+}
+
+.of-ev_station:before {
+	content: '\e96f';
+}
+
+.of-acceleration_normale:before {
+	content: '\e957';
+}
+
+.of-acceleration_forte:before {
+	content: '\e958';
+}
+
+.of-acceleration_moyenne:before {
+	content: '\e959';
+}
+
+.of-sollicitation_moteur:before {
+	content: '\e913';
+}
+
+.of-regime_moteur2:before {
+	content: '\e953';
+}
+
+.of-freinage_normal:before {
+	content: '\e954';
+}
+
+.of-freinage_moyen:before {
+	content: '\e955';
+}
+
+.of-freinage_fort:before {
+	content: '\e956';
+}
+
+.of-battery_alert:before {
+	content: '\e19c';
+}
+
+.of-battery_charging_full:before {
+	content: '\e1a3';
+}
+
+.of-battery_std:before {
+	content: '\e1a5';
+}
+
+.of-battery_unknown:before {
+	content: '\e1a6';
+}
+
+.of-local_gas_station:before {
+	content: '\e546';
+}
+
+.of-network_locked:before {
+	content: '\e61a';
+}
+
+.of-perm_data_setting:before {
+	content: '\e8a4';
+}
+
+.of-perm_scan_wifi:before {
+	content: '\e8a9';
+}
+
+.of-signal_cellular_4_bar:before {
+	content: '\e1c8';
+}
+
+.of-signal_cellular_connected_no_internet_4_bar:before {
+	content: '\e1cd';
+}
+
+.of-signal_cellular_null:before {
+	content: '\e1cf';
+}
+
+.of-signal_cellular_off:before {
+	content: '\e1d0';
+}
+
+.of-signal_wifi_4_bar:before {
+	content: '\e1d8';
+}
+
+.of-signal_wifi_4_bar_lock:before {
+	content: '\e1d9';
+}
+
+.of-signal_wifi_off:before {
+	content: '\e1da';
+}
+
+.of-cog:before {
+	content: '\e9e5';
+}
+
+.of-cogs:before {
+	content: '\e9e6';
+}
+
+.of-leaf:before {
+	content: '\e9e7';
+}
+
+.of-fire:before {
+	content: '\e9e8';
+}
+
+.of-bin:before {
+	content: '\e9e9';
+}
+
+.of-power:before {
+	content: '\e9ea';
+}
+
+.of-switch:before {
+	content: '\e9eb';
+}
+
+.of-power-cord:before {
+	content: '\e9ec';
+}
+
+.of-clipboard:before {
+	content: '\e9ed';
+}
+
+.of-list-numbered:before {
+	content: '\e9ee';
+}
+
+.of-list:before {
+	content: '\e9ef';
+}
+
+.of-list2:before {
+	content: '\e9f0';
+}
+
+.of-download2:before {
+	content: '\e9f1';
+}
+
+.of-download3:before {
+	content: '\e9f2';
+}
+
+.of-upload3:before {
+	content: '\e9f3';
+}
+
+.of-link:before {
+	content: '\e9f4';
+}
+
+.of-flag:before {
+	content: '\e9f5';
+}
+
+.of-star-empty:before {
+	content: '\e9f6';
+}
+
+.of-star-full:before {
+	content: '\e9f7';
+}
+
+.of-filter:before {
+	content: '\ea5b';
+}
+
+.of-file-pdf:before {
+	content: '\eadf';
+}
+
+.of-file-word:before {
+	content: '\eae1';
+}
+
+.of-file-excel:before {
+	content: '\eae2';
+}

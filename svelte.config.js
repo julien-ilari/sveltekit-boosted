@@ -1,17 +1,12 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
 
-/** @type {import('@sveltejs/kit').Config} */
+/** @type {import('@sveltejs/kit').Config}*/
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
 	preprocess: preprocess(),
 
-	// https://kit.svelte.dev/docs/configuration
 	kit: {
 		adapter: adapter({
-			// default options are shown. On some platforms
-			// these options are set automatically — see below
 			pages: 'build',
 			assets: 'build',
 			fallback: null,
@@ -19,25 +14,30 @@ const config = {
 			strict: true,
 			prerender: {
 				enabled: false
-			},
-			
-		  }),
+			}
+		})
 
+		// Ajoutez vos options de configuration ici
 	},
-	// https://kit.svelte.dev/docs/configuration#csrf
+
+	// Désactiver la protection CSRF
 	csrf: false,
-	// Configuration de la politique de sécurité du contenu . 
-	// CSP aide à protéger vos utilisateurs contre les attaques de script intersite (XSS), 
-	// en limitant les endroits à partir desquels les ressources peuvent être chargées.
+
+	// Configurer la politique de sécurité du contenu
 	csp: {
 		directives: {
-			'script-src': ['self']
+			// Autoriser uniquement les scripts provenant du domaine en cours
+			'script-src': ["'self'"],
+			// Autoriser les styles en ligne et les fichiers provenant du domaine en cours
+			'style-src': ["'self'", "'unsafe-inline'"],
+			// Autoriser les images provenant du domaine en cours et d'autres domaines spécifiés
+			'img-src': ["'self'", 'example.com', 'cdn.example.com']
 		},
+		// Activer le mode rapport uniquement pour la politique de sécurité du contenu
 		reportOnly: {
-			'script-src': ['self']
+			'script-src': ["'self'"]
 		}
 	}
-
 };
 
 export default config;

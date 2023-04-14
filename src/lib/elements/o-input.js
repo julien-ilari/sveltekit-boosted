@@ -2,79 +2,96 @@
 import style from '../../scss/styles.scss?inline';
 
 class OrangeInputTextField extends HTMLElement {
+	connectedCallback() {
+		// Shadow
+		const _shadowRoot = this.attachShadow({ mode: 'open', delegatesFocus: true });
 
-    connectedCallback() {
-        // Shadow
-        const _shadowRoot = this.attachShadow({ 'mode': 'open', delegatesFocus: true });
+		// initialize the properties
+		this.outline = false;
+		this.disabled = false;
 
-        // initialize the properties
-        this.outline = false;
-        this.disabled = false;
+		const rootDiv = document.createElement('div');
+		if (this.hasAttribute('class')) {
+			this.setAttribute('style', this.style ? this.style + ';display:block' : 'display:block');
+		}
+		this.classList.add('mb-2');
 
-        const rootDiv = document.createElement('div');
-        if (this.hasAttribute('class')) {
-            this.setAttribute("style", this.style ? (this.style + ";display:block") : "display:block");
-        }
+		const label = document.createElement('label');
+		label.setAttribute('for', 'form-input');
+		label.classList.add('form-label');
+		label.innerText = this.getAttribute('label') ?? '##label';
 
-        const label = document.createElement('label');
-        label.setAttribute("for", "form-input");
-        label.classList.add("form-label");
-        label.innerText = this.getAttribute('label') ?? "##label";
+		const button = document.createElement('button');
+		if (this.hasAttribute('helper')) {
+			button.setAttribute('type', 'button');
+			button.setAttribute('class', 'form-helper');
+			button.setAttribute('data-bs-toggle', 'tooltip');
+			button.setAttribute('data-bs-placement', 'top');
+			button.setAttribute('data-bs-title', 'Help for text area');
 
-        const input = document.createElement('input');
-        input.setAttribute("id", "form-input");
-        input.setAttribute("aria-labelledby", "websiteLabel websiteFeedback");
-        input.setAttribute("type", "text");
-        input.classList.add("form-control");
-        // set default value, if any
-        if (this.hasAttribute('value')) {
-            let val = this.getAttribute('value');
-            if (val) input.value = val;
-        }
-        // check for required attr
-        if (this.hasAttribute('required')) {
-            // set corresponding input property
-            input.required = true;
-            // by default, the field is invalid until filled in
-            this.setAttribute('invalid', "true");
-            label.classList.add("is-required");
+			const span = document.createElement('span');
+			span.classList.add('visually-hidden');
+			span.innerText = this.getAttribute('helper');
+			button.appendChild(span);
+		}
 
-        }
+		const input = document.createElement('input');
+		input.setAttribute('id', 'form-input');
+		input.setAttribute('aria-labelledby', 'websiteLabel websiteFeedback');
+		input.setAttribute('type', 'text');
+		input.classList.add('form-control');
+		input.classList.add('form-control-sm');
 
-        input.addEventListener('input', (e) => {
-            // @ts-ignore
-            // sync value with attr
-            this.setAttribute('value', input.value);
+		// set default value, if any
+		if (this.hasAttribute('value')) {
+			let val = this.getAttribute('value');
+			if (val) input.value = val;
+		}
+		// check for required attr
+		if (this.hasAttribute('required')) {
+			// set corresponding input property
+			input.required = true;
+			// by default, the field is invalid until filled in
+			this.setAttribute('invalid', 'true');
+			label.classList.add('is-required');
+		}
 
-            // @ts-ignore
-            //const clone = new e.constructor(e.type, e); // clone l'événement
-            //this.dispatchEvent(clone); // puis le transférer
-            this.dispatchEvent(
-                new CustomEvent("change", {
-                    bubbles: true,
-                    composed: true,
-                    // @ts-ignore
-                    detail: { value: e.composedPath()[0].value }
-                })
-            );
-        });
+		input.addEventListener('input', (e) => {
+			// @ts-ignore
+			// sync value with attr
+			this.setAttribute('value', input.value);
 
-        // Style
-        const styleElem = document.createElement("style");
-        styleElem.appendChild(document.createTextNode(style));
-        _shadowRoot.appendChild(styleElem);
+			// @ts-ignore
+			//const clone = new e.constructor(e.type, e); // clone l'événement
+			//this.dispatchEvent(clone); // puis le transférer
+			this.dispatchEvent(
+				new CustomEvent('change', {
+					bubbles: true,
+					composed: true,
+					// @ts-ignore
+					detail: { value: e.composedPath()[0].value }
+				})
+			);
+		});
 
-        // Root DIV
-        rootDiv.appendChild(label);
-        rootDiv.appendChild(input);
-        _shadowRoot.appendChild(rootDiv);
-    }
+		// Style
+		const styleElem = document.createElement('style');
+		styleElem.appendChild(document.createTextNode(style));
+		_shadowRoot.appendChild(styleElem);
 
-    constructor() {
-        super();
-        this.internals = this.attachInternals();
-    }
+		// Root DIV
+		rootDiv.appendChild(label);
+		if (this.hasAttribute('helper')) {
+			rootDiv.appendChild(button);
+		}
 
+		rootDiv.appendChild(input);
+		_shadowRoot.appendChild(rootDiv);
+	}
+
+	constructor() {
+		super();
+	}
 }
 
-customElements.define("o-input", OrangeInputTextField);
+customElements.define('o-input', OrangeInputTextField);

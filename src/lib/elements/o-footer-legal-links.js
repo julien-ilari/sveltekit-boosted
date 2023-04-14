@@ -1,6 +1,6 @@
 // @ts-nocheck
-const template = document.createElement("template");
-template.innerHTML = /*html*/`
+const template = document.createElement('template');
+template.innerHTML = /*html*/ `
 <style>
 
   *, ::after, ::before {
@@ -80,46 +80,86 @@ template.innerHTML = /*html*/`
 </footer>`;
 
 export class OrangeLegalLinks extends HTMLElement {
+	constructor() {
+		super();
+		this.attachShadow({ mode: 'open' });
+		this._shadowRoot = this.shadowRoot.append(template.content.cloneNode(true));
 
-  constructor() {
-    super();
-    this.attachShadow({ mode: "open" });
-    this._shadowRoot = this.shadowRoot.append(template.content.cloneNode(true));
+		// Create a reference to the list element in the Shadow DOM
+		this._navBar = this.shadowRoot.querySelector('#navbar');
+		this.copyright = this.getAttribute('copyright');
 
+		this._eventTarget = new EventTarget(); // Créer l'objet EventTarget
+		this._onClick = this._onClick.bind(this); // Attacher la fonction _onClick à l'instance de la classe
+	}
 
-    // Create a reference to the list element in the Shadow DOM
-    this._navBar = this.shadowRoot.querySelector('#navbar');
-    this.copyright = this.getAttribute("copyright");
+	connectedCallback() {
+		this.classList.add('footer-fixed');
+	}
 
-    
-  }
+	set items(value) {
+		// Loop through the params array and add each item to the list
+		value.forEach((item, index) => {
+			let li = document.createElement('span');
+			if (item.to) {
+				let a = document.createElement('a');
+				a.href = `${item.to}`;
+				a.innerText = `${item.value}`;
+				a.classList.add('nav-link');
+				a.rel = `${item.rel ?? 'noreferrer'}`;
+				a.target = '_blank';
+				a.setAttribute('data-index', index);
+				a.setAttribute('data-to', `${item.to}`);
+				a.setAttribute('data-value', `${item.value}`);
 
-  connectedCallback() {
-    this.classList.add("footer-fixed");
-  }
+				// Ajouter un gestionnaire d'événements pour l'événement click
+				a.addEventListener('click', this._onClick);
 
-  set items(value) {
-    // Loop through the params array and add each item to the list
-    value.forEach(item => {
-      let li = document.createElement('span');
-      li.innerHTML = item.to
-        ? `<a href="${item.to}" class="nav-link">${item.value}</a>`
-        : `<span class="fw-bold">${item.value}</span>`;
+				li.appendChild(a);
+			} else {
+				li.innerHTML = `<span class="fw-bold">${item.value}</span>`;
+			}
 
-      this._navBar.appendChild(li);
+			this._navBar.appendChild(li);
 
-      let cop = document.createElement('span');
-      cop.innerHTML += `•`
-      cop.classList.add("point");
-      this._navBar.appendChild(cop);
+			let cop = document.createElement('span');
+			cop.innerHTML += `•`;
+			cop.classList.add('point');
+			this._navBar.appendChild(cop);
+		});
 
-    });
+		let copyright = document.createElement('span');
+		copyright.innerHTML += `© ${this.copyright}`;
+		this._navBar.appendChild(copyright);
+	}
 
-    let copyright = document.createElement('span');
-    copyright.innerHTML += `© ${this.copyright}`
-    this._navBar.appendChild(copyright);
-  }
+	_onClick(event) {
+		// Si l'élément cliqué est dans le shadow DOM
 
+		if (event.target.tagName === 'A') {
+			//event.preventDefault(); // Empêcher la page de naviguer
+			const link = event.target.getAttribute('href');
+			const index = event.target.getAttribute('data-index');
+			const to = event.target.getAttribute('data-to');
+			const value = event.target.getAttribute('data-value');
+
+			this.dispatchEvent(
+				new CustomEvent('click', {
+					bubbles: true,
+					composed: true,
+					detail: { link, index, to, value } // Passer l'index dans la propriété "detail" de l'objet d'événement
+				})
+			);
+		}
+	}
+
+	get eventTarget() {
+		return this._eventTarget;
+	}
+
+	disconnectedCallback() {
+		this.removeEventListener('click', this._onClick);
+	}
 }
 
-customElements.define("o-footer-legal-links", OrangeLegalLinks);
+customElements.define('o-footer-legal-links', OrangeLegalLinks);

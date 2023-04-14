@@ -24,6 +24,9 @@ export class OrangeNavBar extends HTMLElement {
 			// Create a reference to the list element in the Shadow DOM
 			this._navBar = this.shadowRoot.querySelector('#navbar');
 		}
+
+		// Activate the link corresponding to the current URL path
+		this.selectActiveLink();
 	}
 
 	/**
@@ -36,22 +39,17 @@ export class OrangeNavBar extends HTMLElement {
 
 		// Loop through the params array and add each item to the list
 		value.forEach((item, index) => {
-			let li = document.createElement('span');
-			li.classList.add('nav-item');
-
-			let activeClass =this.hasAttribute('index') 
-      // @ts-ignore
-      && (index == this.getAttribute('index')  ? 'active' : '');
-
-			li.innerHTML = `<a href="${item.to}" class="nav-link ${activeClass}">${item.value}</a>`;
+			let link = document.createElement('a');
+			link.href = item.to;
+			link.classList.add('nav-link');
+			link.innerText = item.value;
 
 			// event click => clear
-			li.addEventListener('click', () => {
+			link.addEventListener('click', (e) => {
 				this._navBar?.querySelectorAll('a').forEach((o) => o.classList.remove('active'));
 
 				// add class active
-				const link = li.querySelector('a');
-				link?.classList.add('active');
+				e.target.classList.add('active');
 
 				this.dispatchEvent(
 					new CustomEvent('change', {
@@ -60,7 +58,7 @@ export class OrangeNavBar extends HTMLElement {
 
 						// @ts-ignore
 						detail: {
-							index: index,
+							index: 2,
 							value: item.value,
 							to: item.to
 						}
@@ -68,8 +66,59 @@ export class OrangeNavBar extends HTMLElement {
 				);
 			});
 
-			this._navBar?.appendChild(li);
+			this._navBar?.appendChild(link);
 		});
+		this.selectActiveLink();
+	}
+
+	selectActiveLink() {
+		// Get the current URL path
+		const path = window.location.pathname;
+		// Find the link with an "href" attribute matching the current path
+		const activeLink = this._navBar.querySelector(`a[href='${path}']`);
+
+		// If a link was found, activate it
+		if (activeLink) {
+			activeLink.classList.add('active');
+		}
+	}
+
+	setTo(hrefValue) {
+		this._navBar?.querySelectorAll('a').forEach((o) => o.classList.remove('active'));
+		const activeLink = this._navBar?.querySelector(`a[href='${hrefValue}']`);
+		if (activeLink) {
+			activeLink.classList.add('active');
+			const item = {
+				value: activeLink.textContent,
+				to: activeLink.getAttribute('href')
+			};
+			this.dispatchEvent(
+				new CustomEvent('change', {
+					bubbles: true,
+					composed: true,
+					detail: { index, ...item }
+				})
+			);
+		}
+	}
+
+	setActiveLink(index) {
+		this._navBar?.querySelectorAll('a').forEach((o) => o.classList.remove('active'));
+		const activeLink = this._navBar?.querySelectorAll('a')[index];
+		if (activeLink) {
+			activeLink.classList.add('active');
+			const item = {
+				value: activeLink.textContent,
+				to: activeLink.getAttribute('href')
+			};
+			this.dispatchEvent(
+				new CustomEvent('change', {
+					bubbles: true,
+					composed: true,
+					detail: { index, ...item }
+				})
+			);
+		}
 	}
 }
 

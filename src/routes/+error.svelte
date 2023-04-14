@@ -31,9 +31,7 @@
 		</div>
 	</div>
 
-	<footer>
-		
-	</footer>
+	<footer />
 </div>
 
 <style>
