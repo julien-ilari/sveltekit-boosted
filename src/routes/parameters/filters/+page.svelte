@@ -1,9 +1,9 @@
 <script lang="ts">
-	import ElementArticle from '../../../compoments/common/card/SimpleCard.svelte';
-	import ElementAside from '../../../compoments/common/ElementAside.svelte';
-	import ElementField from '../../../compoments/common/forms/Input.svelte';
-	import OptionTag from '../../../compoments/utilities/ElementFilterTag.svelte';
-	import TitleIcon from '../../../compoments/layout/TitleHeader.svelte';
+	import ElementArticle from '@/compoments/common/card/SimpleCard.svelte';
+	import ElementAside from '@/compoments/common/ElementAside.svelte';
+	import ElementField from '@/compoments/common/forms/Input.svelte';
+	import OptionTag from '@/compoments/utilities/ElementFilterTag.svelte';
+	import TitleIcon from '@/compoments/layout/TitleHeader.svelte';
 	import translate, { type I18n } from '$lib/utils/translate';
 
 	const translations: Array<I18n> = [

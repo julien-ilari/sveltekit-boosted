@@ -1,11 +1,21 @@
 {
 	"extends": "./.svelte-kit/tsconfig.json",
 	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"resolveJsonModule": true,
+		"baseUrl": "./",
+
 		"allowJs": false,
 		"checkJs": false,
+		"paths": {
+			"@/*": ["src/*"],
+			"$lib": ["./src/lib"],
+			"$lib/*": ["src/lib/*"]
+		},
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,

@@ -96,7 +96,7 @@
 	</div>
 </div>
 
-<style type="text/css" global>
+<style global>
 	.full-screen {
 		width: 100vh;
 		height: 100vh;

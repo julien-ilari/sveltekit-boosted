@@ -1,4 +1,3 @@
-// @ts-nocheck
 // template navbar-brand
 const _template = document.createElement('template');
 _template.innerHTML = /*html*/ `

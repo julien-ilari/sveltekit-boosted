@@ -15,6 +15,7 @@ export default {
 
 	resolve: {
 		alias: {
+			'@': path.resolve('/src'),
 			'~boosted': path.resolve(__dirname, 'node_modules/boosted')
 		}
 	},

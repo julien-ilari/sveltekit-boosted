@@ -1,4 +1,3 @@
-// @ts-nocheck
 export class WcTabPanel extends HTMLElement {
 	static observedAttributes = [];
 	constructor() {

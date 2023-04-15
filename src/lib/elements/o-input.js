@@ -1,4 +1,3 @@
-// @ts-ignore
 import style from '../../scss/styles.scss?inline';
 
 class OrangeInputTextField extends HTMLElement {

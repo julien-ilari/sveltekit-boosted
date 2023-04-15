@@ -1,4 +1,3 @@
-// @ts-nocheck
 const template = document.createElement('template');
 template.innerHTML = /*html*/ `
 <style>

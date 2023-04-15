@@ -2,7 +2,6 @@
 	
 	// Import our custom CSS
 	import '../scss/styles.scss';
-	import '/static/css/OceanFont.css';
 	import '@fortawesome/fontawesome-free/css/all.min.css';
 
 	// Import all of Boosted's JS

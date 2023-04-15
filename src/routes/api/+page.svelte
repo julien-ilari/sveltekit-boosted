@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { httpStoreOcean } from '$lib/stores/storeOceanApi';
 	import { onMount } from 'svelte';
-	import Input from '../../compoments/common/forms/Input.svelte';
-	import CardSimple from '../../compoments/common/card/SimpleCard.svelte';
+	import Input from '@/compoments/common/forms/Input.svelte';
+	import CardSimple from '@/compoments/common/card/SimpleCard.svelte';
 	import { vehicleStore, addVehicles } from './storeVehicle';
-	import DataTable from '../../compoments/common/table/DataTable.svelte';
+	import DataTable from '@/compoments/common/table/DataTable.svelte';
 	import axios from 'axios';
 
 	let fetched = false;
