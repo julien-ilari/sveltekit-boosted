@@ -15,7 +15,7 @@ export interface ErrorJsonAPI {
 }
 
 export interface HttpStoreOcean {
-	subscribe: (run: (value: any) => void) => () => void;
+	subscribe: (run: (value: any, token?: string) => void) => () => void;
 	unsubscribe: () => void;
 	action: (method: 'get' | 'post' | 'delete', path: string, config?: RawAxiosRequestConfig<any>) => Promise<boolean>;
 	updateToken: (token: string) => void;
@@ -109,8 +109,11 @@ export function httpStoreOcean(baseUrl: string): HttpStoreOcean {
 	}
 
 	return {
-		subscribe: (run: (value: any) => void) => {
-			unsubscribe = store.subscribe(run);
+		subscribe: (run: (value: any, token?: string) => void) => {
+			unsubscribe = store.subscribe((value: any) => {
+				const token = getToken();
+				run(value, token);
+			});
 			return unsubscribe;
 		},
 		unsubscribe: () => unsubscribe && unsubscribe(),

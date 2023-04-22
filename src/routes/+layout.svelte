@@ -1,5 +1,4 @@
 <script>
-	
 	// Import our custom CSS
 	import '../scss/styles.scss';
 	import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -13,8 +12,9 @@
 	import '../lib/elements/o-navbar.js';
 	import '../lib/elements/o-footer-legal-links.js';
 	import '../lib/elements/o-header.js';
+
 	import Footer from '../compoments/layout/Footer.svelte';
-	import NavigationHeader from '../compoments/layout/NavigationHeader.svelte';
+	import Header from '../compoments/layout/Header.svelte';
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -26,28 +26,14 @@
 	</symbol>
 </svg>
 
-<NavigationHeader
-	items={[
-		{ to: '/', value: 'Dashboard' },
-		{ to: '/api', value: 'API' },
-		{ to: '/parameters/filters', value: 'Paramètres' }
-	]}
-/>
+
+<Header />
+
 <main class="bd-content order-1 mt-5">
 	<slot />
 </main>
-<Footer
-	items={[
-		{
-			to: 'https://www.orange-business.com/fr/informations-legales',
-			value: 'Terms and conditions'
-		},
-		{ to: '/', value: 'Privacy' },
-		{ to: '/', value: 'Cookie policy' },
-		{ to: '/', value: 'Accessibility statement' },
-		{ to: '/', value: 'Become a reseller' }
-	]}
-/>
+
+<Footer />
 
 <style>
 </style>

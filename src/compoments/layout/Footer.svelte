@@ -4,7 +4,16 @@
 	let footer: any;
 
 	export let updateLink: (event: any) => {};
-	export let items: [];
+	export let items = [
+		{
+			to: 'https://www.orange-business.com/fr/informations-legales',
+			value: 'Terms and conditions'
+		},
+		{ to: '/', value: 'Privacy' },
+		{ to: '/', value: 'Cookie policy' },
+		{ to: '/', value: 'Accessibility statement' },
+		{ to: '/', value: 'Become a reseller' }
+	];
 
 	function handleClick(event: any) {
 		// Appeler la fonction updateLink fournie par l'utilisateur

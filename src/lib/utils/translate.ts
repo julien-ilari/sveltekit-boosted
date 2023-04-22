@@ -17,12 +17,27 @@ export type I18n = {
 export type Lang = 'fr' | 'en';
 
 const data: Array<I18n> = [
+	{ key: 'id', values: { fr: '#id', en: '#id' } },
+	{ key: 'to', values: { fr: 'à', en: 'to' } },
+	{ key: 'of', values: { fr: 'sur', en: 'of' } },
+
+	{ key: 'datatable.previous', values: { fr: 'précédent', en: 'previous' } },
+	{ key: 'datatable.next', values: { fr: 'suivant', en: 'next' } },
+	{ key: 'datatable.search', values: { fr: 'rechercher', en: 'search' } },
+
+	{ key: 'datatable.display', values: { fr: 'Affichage de %1 lignes sur %2', en: 'Displaying %1 out of %1 rows' } },
+
 	{ key: 'energy.thermal', values: { fr: 'thermique', en: 'thermal' } },
 	{ key: 'energy.hybrid', values: { fr: 'hybride', en: 'hybrid' } },
 	{ key: 'energy.electrical', values: { fr: 'électrique', en: 'electrical' } },
 
 	// sectionfFlotte
 	{ key: 'fleet.vehicle_', values: { fr: 'véhicule', en: 'vehicle' } },
+	{ key: 'fleet.vehicle.immat', values: { fr: 'immatriculation', en: 'registration number' } },
+	{ key: 'fleet.vehicle.desc', values: { fr: 'description', en: 'description' } },
+	{ key: 'fleet.vehicle.motorisation.type', values: { fr: 'type motorisation', en: 'motorysation type' } },
+	{ key: 'fleet.vehicle.category', values: { fr: 'catégorie', en: 'category' } },
+
 	{ key: 'fleet.engin_', values: { fr: 'engin', en: 'engin' } },
 	{ key: 'fleet.material_', values: { fr: 'matériel', en: 'off-road motor equipment' } },
 
