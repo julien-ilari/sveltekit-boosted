@@ -3,53 +3,44 @@
 	import { onMount } from 'svelte';
 	import Input from '@/compoments/common/forms/Input.svelte';
 	import CardSimple from '@/compoments/common/card/SimpleCard.svelte';
-	import { vehicleStore, addEntitiesVehiclesDrivers } from '../../lib/stores/storeIndexedDB';
+	import { addEntitiesVehiclesDrivers, vehicleStore } from '$lib/stores/storeIndexedDB';
 	import DataTable from '@/compoments/common/table/DataTable.svelte';
 	import axios from 'axios';
-	import { writable } from 'svelte/store';
-	import Modal from '@/compoments/common/modals/Modal.svelte';
-
-	let fetched = false;
-	let loading = false;
-	let loadingDelai = 0;
-	let loadingMessage = '';
-	async function addDot() {
-		while (loading) {
-			loadingMessage += '.';
-			await new Promise((resolve) => setTimeout(resolve, 1000));
-			loadingDelai++;
-		}
-	}
-
-	$: if (loading) {
-		loadingDelai = 0;
-		addDot(); // appeler la fonction asynchrone
-	} else {
-		loadingMessage = ''; // effacer le message de chargement
-	}
+	import { writable, type Writable } from 'svelte/store';
 
 	$: server = 'https://v3.oceansystem.com/ocean/restapi';
-	$: apidocs = `${server}/api-docs`;
-	$: docs = new Map();
-	$: if (apidocs) {
-		data.set([]);
-		initSwaggerClient();
-	}
-
 	$: swagger = `${server}/apidocs`;
-	let swaggerSpec: any;
+	$: apidocs = `${server}/api-docs`;
+	let docs = new Map();
+
+	let fetched = false;
 
 	$: selectedEndPoint = '/vehicule_engin/vehicles';
-	$: path = '/vehicule_engin/vehicles?customerId=12597';
+
+	let params = {
+		customerId: 12597, // flotte orange
+		period: {
+			start: '2023-03-31T05:00:00.000Z',
+			end: '2023-03-31T19:00:00.000Z'
+		},
+		vehicle: {
+			immat: 'EV-508-RS'
+		},
+		entity: {
+			id: undefined
+		},
+		driver: {
+			id: undefined
+		}
+	};
 
 	let customerId: number = 12597;
 	let vehImmat: string = 'EV-508-RS';
 	let dateDebut: string = '2023-03-31T05:00:00.000Z';
 	let dateFin: string = '2023-03-31T19:00:00.000Z';
 
-	const data = writable<any[]>([]);
-	$: if (vehicleStore && !fetched && $vehicleStore.length > 0) {
-		data.set($vehicleStore);
+	const data: Writable<[]> = writable([]);
+	$: if ($data && $data.length > 0) {
 		fetched = true;
 	}
 
@@ -57,8 +48,7 @@
 	$: if (server) {
 		httpStore.subscribe((responseData: any) => {
 			if (!isEmpty(responseData) && !responseData.token) {
-				console.log(responseData);
-				data.set(responseData);
+				console.log(responseData);	
 			}
 		});
 	}
@@ -73,29 +63,24 @@
 		return JSON.stringify(obj) === JSON.stringify({});
 	}
 
-	// ---- FIN AUTHENTIFICATION
+
 
 	async function handleSearch() {
-		loading = true;
 		const success = await httpStore.action(
 			'get',
 			selectedEndPoint + '?customerId=' + customerId + '&immatriculation=' + vehImmat
 		);
+
 		if (success) addEntitiesVehiclesDrivers($data);
-		fetched = true;
-		loading = false;
 	}
 
 	async function handleSearchAll() {
-		loading = true;
-		const success = await httpStore.action('get', path);
+		const success = await httpStore.action('get', '/vehicule_engin/vehicles?customerId=12597');
 		fetched = true;
-		loading = false;
 		if (success) addEntitiesVehiclesDrivers($data);
 	}
 
 	async function handleSearchPositions() {
-		loading = true;
 		const success = await httpStore.action(
 			'get',
 			'positions/search?byStorageDate=false' +
@@ -108,8 +93,6 @@
 				'&endDate=' +
 				dateFin
 		);
-		fetched = true;
-		loading = false;
 	}
 
 	const operation = (path: string) => {
@@ -139,12 +122,15 @@
 		return response;
 	};
 
-	onMount(async () => {
-		// initialisation swagger client
-		const swaggerClient = await initSwaggerClient();
+	onMount(() => {
+		
+		const store: Writable<[]> = vehicleStore;
+		store.subscribe((value) => {
+			data.set(value);
+		});
 
-		// Si vous avez déjà un token enregistré, vous pouvez le récupérer ici
-		// et le stocker dans la variable "token".
+
+		initSwaggerClient();
 	});
 </script>
 
@@ -205,7 +191,19 @@
 	</div>
 	<div class="col-12">
 		<CardSimple title="Données">
-			<DataTable headers={['id', 'immatriculation', 'description', 'typeMotorisation', 'categorie']} rows={$data} />
+			<DataTable
+				headers={[
+					'id',
+					'numeroEmbarque',
+					'modele',
+					'marque',
+					{ label: 'type', key: 'libelleTypeAsset' },
+					'immatriculation',
+					'typeMotorisation',
+					'categorie'
+				]}
+				storeRows={data}
+			/>
 		</CardSimple>
 	</div>
 </div>

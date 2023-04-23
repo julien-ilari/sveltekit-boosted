@@ -3,7 +3,7 @@
  */
 export type Langs = {
 	fr: string;
-	en: string;
+	en?: string;
 };
 
 /**
@@ -25,7 +25,10 @@ const data: Array<I18n> = [
 	{ key: 'datatable.next', values: { fr: 'suivant', en: 'next' } },
 	{ key: 'datatable.search', values: { fr: 'rechercher', en: 'search' } },
 
-	{ key: 'datatable.display', values: { fr: 'Affichage de %1 lignes sur %2', en: 'Displaying %1 out of %1 rows' } },
+	{
+		key: 'datatable.display',
+		values: { fr: 'Affichage des lignes %1 à %2 sur %3' }
+	},
 
 	{ key: 'energy.thermal', values: { fr: 'thermique', en: 'thermal' } },
 	{ key: 'energy.hybrid', values: { fr: 'hybride', en: 'hybrid' } },
