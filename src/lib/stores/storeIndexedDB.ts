@@ -1,18 +1,11 @@
 import { writable, type Writable } from 'svelte/store';
 
-// Définir un magasin pour les véhicules
+// Définir un magasin pour les véhicules, entités, chauffeurs
 const vehicleStore: Writable<[]> = writable([]);
-vehicleStore.subscribe((v) => {
-	console.log(JSON.stringify(v));
-});
-
-// Définir un magasin pour les entités
 const entityStore: Writable<[]> = writable([]);
-
-// Définir un magasin pour les chaufferus
 const driverStore: Writable<[]> = writable([]);
 
-const DB_NAME = 'mydb';
+const DB_NAME = 'cuid_';
 const DB_VERSION = 1;
 const VEHICLE_STORE = 'vehicles';
 const ENTITY_STORE = 'entities';
@@ -21,8 +14,8 @@ const DRIVER_STORE = 'drivers';
 let db: any = null;
 
 // Ouvrir la base de données
-function openDatabase() {
-	let request = indexedDB.open(DB_NAME, DB_VERSION);
+function openDatabase(custumerId: string) {
+	let request = indexedDB.open(DB_NAME + custumerId, DB_VERSION);
 	request.onerror = (event) => {
 		const target: any = event?.target;
 		console.error("Erreur lors de l'ouverture de la base de données", target.errorCode);
@@ -109,11 +102,18 @@ export function addVehicles(vehicles: any[]) {
 
 // Ajouter plusieurs véhicules dans le magasin d'objets
 export function addEntitiesVehiclesDrivers(items: any[]) {
-	console.log('Tentative de mise à jour du local storage, items :');
+	if (items.length === 0) {
+		console.log('Aucun item');
+		return;
+	}
+
+	console.log('Tentative de mise à jour du local storage');
 	// Local storage
 	let dboEntityStore = getObjectStore(ENTITY_STORE);
 	let dboVehicletore = getObjectStore(VEHICLE_STORE);
 	let dboDriverStore = getObjectStore(DRIVER_STORE);
+	console.log('items');
+	console.log(items);
 
 	// update the local storage
 	for (let item of items) {
@@ -183,13 +183,15 @@ function getItems(storeNames: string = VEHICLE_STORE || ENTITY_STORE || DRIVER_S
 		};
 
 		request.onsuccess = (event: any) => {
-			console.log('Données récupérées avec succès');
+			console.log(`(${storeNames}) Données récupérées avec succès`);
 			resolve(event.target.result);
 		};
 	});
 }
 
 // Ouvrir la base de données au démarrage de l'application
-openDatabase();
+export const openDB = (custumerId: string) => {
+	openDatabase(custumerId);
+};
 
 export { vehicleStore, entityStore, driverStore };

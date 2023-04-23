@@ -3,10 +3,12 @@
 	import { onMount } from 'svelte';
 	import Input from '@/compoments/common/forms/Input.svelte';
 	import CardSimple from '@/compoments/common/card/SimpleCard.svelte';
-	import { addEntitiesVehiclesDrivers, vehicleStore } from '$lib/stores/storeIndexedDB';
+	import { addEntitiesVehiclesDrivers, openDB, vehicleStore } from '$lib/stores/storeIndexedDB';
 	import DataTable from '@/compoments/common/table/DataTable.svelte';
 	import axios from 'axios';
 	import { writable, type Writable } from 'svelte/store';
+
+
 
 	$: server = 'https://v3.oceansystem.com/ocean/restapi';
 	$: swagger = `${server}/apidocs`;
@@ -49,6 +51,8 @@
 		httpStore.subscribe((responseData: any) => {
 			if (!isEmpty(responseData) && !responseData.token) {
 				console.log(responseData);	
+				data.set(responseData);
+				addEntitiesVehiclesDrivers(responseData);
 			}
 		});
 	}
@@ -63,21 +67,16 @@
 		return JSON.stringify(obj) === JSON.stringify({});
 	}
 
-
-
 	async function handleSearch() {
 		const success = await httpStore.action(
 			'get',
 			selectedEndPoint + '?customerId=' + customerId + '&immatriculation=' + vehImmat
 		);
-
-		if (success) addEntitiesVehiclesDrivers($data);
 	}
 
 	async function handleSearchAll() {
 		const success = await httpStore.action('get', '/vehicule_engin/vehicles?customerId=12597');
 		fetched = true;
-		if (success) addEntitiesVehiclesDrivers($data);
 	}
 
 	async function handleSearchPositions() {
@@ -123,12 +122,12 @@
 	};
 
 	onMount(() => {
-		
+
+		openDB(customerId.toString());
 		const store: Writable<[]> = vehicleStore;
 		store.subscribe((value) => {
 			data.set(value);
 		});
-
 
 		initSwaggerClient();
 	});

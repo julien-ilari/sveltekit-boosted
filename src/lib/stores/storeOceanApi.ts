@@ -22,18 +22,36 @@ export interface HttpStoreOcean {
 	getToken: () => string;
 }
 
+function decodeToken(encodedToken: string, passphrase: string): string {
+	const bytes = CryptoJS.AES.decrypt(encodedToken, passphrase);
+	const originalToken = bytes.toString(CryptoJS.enc.Utf8);
+	return originalToken;
+}
+
+// Fonction pour vérifier le token d'authentification
+function verifyToken() {
+	const token = localStorage.getItem('token') ? decodeToken(localStorage.getItem('token') ?? '', 'c1d62263d4') : '';
+	// encode
+	return token;
+}
+
+// Get token from localStorage or set it to an empty string
+let tokenStored: Writable<string> = writable(verifyToken());
+
 export function httpStoreOcean(baseUrl: string): HttpStoreOcean {
 	let store: Writable<any> = writable([]);
+	let headers: any;
+
+	// subscribe to tokenStored changes
+	tokenStored.subscribe((newToken: string) => {
+		headers = {
+			Accept: 'application/json;charset=utf-8',
+			'Content-Type': 'application/json',
+			'X-Auth-Token': newToken
+		};
+	});
 
 	let unsubscribe: () => void;
-
-	// Get token from localStorage or set it to an empty string
-	let token = verifyToken();
-	const headers = {
-		Accept: 'application/json;charset=utf-8',
-		'Content-Type': 'application/json',
-		'X-Auth-Token': token
-	};
 
 	async function action(method: 'get' | 'post' | 'delete', path: string, config?: RawAxiosRequestConfig<any>) {
 		// Validate method
@@ -80,17 +98,11 @@ export function httpStoreOcean(baseUrl: string): HttpStoreOcean {
 		}
 	}
 
-	// Fonction pour vérifier le token d'authentification
-	function verifyToken() {
-		const token = localStorage.getItem('token') ? decodeToken(localStorage.getItem('token') ?? '', 'c1d62263d4') : '';
-		// encode
-		return token;
-	}
-
 	// Fonction pour créer/mettre à jour un token d'authentification
 	function updateToken(xAuthToken: string) {
-		token = encodeToken(xAuthToken, 'c1d62263d4');
+		const token = encodeToken(xAuthToken, 'c1d62263d4');
 		localStorage.setItem('token', token);
+		tokenStored.set(xAuthToken);
 	}
 
 	function getToken() {
@@ -100,12 +112,6 @@ export function httpStoreOcean(baseUrl: string): HttpStoreOcean {
 	function encodeToken(token: string, passphrase: string): string {
 		const ciphertext = CryptoJS.AES.encrypt(token, passphrase);
 		return ciphertext.toString();
-	}
-
-	function decodeToken(encodedToken: string, passphrase: string): string {
-		const bytes = CryptoJS.AES.decrypt(encodedToken, passphrase);
-		const originalToken = bytes.toString(CryptoJS.enc.Utf8);
-		return originalToken;
 	}
 
 	return {
