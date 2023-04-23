@@ -9,19 +9,30 @@
 	export let callbackFunction: (e: any) => void;
 
 	// Gestion des listes
-	const entities = entityStore;
-	const vehicles = vehicleStore;
-	const drivers = driverStore;
+	const configEntities = {
+		storeRows: entityStore,
+		headers: ['id', 'nom']
+	};
 
-	function handleSelect(event: any) {
-		const selectedRows = event?.detail?.rows;
-		// alert(JSON.stringify(selectedRows, null, 2));
-		// do something with selected rows
-	}
+	const configVehicles = {
+		storeRows: vehicleStore,
+		headers: [
+			{ label: 'id', key: 'id' },
+			{ label: translate('fleet.vehicle.immat'), key: 'immatriculation' },
+			{ label: translate('fleet.vehicle.desc'), key: 'description' },
+			{ label: translate('fleet.vehicle.motorisation.type'), key: 'typeMotorisation' },
+			{ label: translate('fleet.vehicle.category'), key: 'categorie' }
+		]
+	};
+
+	const configDrivers = {
+		storeRows: driverStore,
+		headers: ['id', 'idNom', 'idPrenom', 'email']
+	};
 </script>
 
 <OffCanvasContainer id="transfersal-filter-offcanvas">
-	<OffCanvasContent
+	<OffCanvasContent 
 		id="offcanvasGlobalFilterSelected"
 		position="start"
 		title="Sélection"
@@ -33,32 +44,15 @@
 	</OffCanvasContent>
 
 	<OffCanvasContent id="offcanvasEntities" title="Filtrer les entités" on:notify={callbackFunction}>
-		<DataTable headers={['id', 'nom']} storeRows={entities} />
+		<DataTable {...configEntities} />
 	</OffCanvasContent>
 
 	<OffCanvasContent id="offcanvasVehicles" title="Filtrer les véhicules" on:notify={callbackFunction}>
-		<DataTable
-			on:select={handleSelect}
-			headers={[
-				{ label: 'id', key: 'id' },
-				{ label: translate('fleet.vehicle.immat'), key: 'immatriculation' },
-				{ label: translate('fleet.vehicle.desc'), key: 'description' },
-				{ label: translate('fleet.vehicle.motorisation.type'), key: 'typeMotorisation' },
-				{ label: translate('fleet.vehicle.category'), key: 'categorie' }
-			]}
-			storeRows={vehicles}
-		/>
+		<DataTable {...configVehicles} />
 	</OffCanvasContent>
 
 	<OffCanvasContent id="offcanvasDrivers" title="Filtrer les chauffeurs" on:notify={callbackFunction}>
-		<DataTable
-			headers={[
-				'id',
-				{ label: 'nom', key: 'nomInd' },
-				{ label: 'prénom', key: 'prenomInd' },
-				{ label: 'email', key: 'email' }
-			]}
-			storeRows={drivers}
-		/>
+		<DataTable {...configDrivers} />
+		<DataTable {...configDrivers} selectedRows={configDrivers.storeRows} />
 	</OffCanvasContent>
 </OffCanvasContainer>

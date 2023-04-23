@@ -1,52 +1,27 @@
 <script lang="ts">
 	import translate from '@/lib/utils/translate';
-	import { onDestroy, createEventDispatcher } from 'svelte';
+	import { onDestroy, createEventDispatcher, beforeUpdate, afterUpdate, onMount } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
 	export let headers: [{ label: string; key: string }] | any; // Les en-têtes de colonnes de la table
 
-	// Les lignes actuellement affichées, en fonction des critères de filtrage et de pagination
-	const displayedRows: Writable<Array<any>> = writable([]);
-	// Les lignes actuellement sélectionnées
-	const selectedRows: Writable<Array<any>> = writable([]);
-
-	let rows: [] = []; // Les données des lignes de la table
-	$: totalRecords = rows.length; // Calcul du nombre total de records */
+	export let storeRows: Writable<any[]> = writable([]); // Toutes les lignes
+	export let selectedRows: Writable<any[]> = writable([]); // Les lignes actuellement sélectionnées
+	export let displayedRows: Writable<Array<any>> = writable([]); // Les lignes actuellement affichées
 
 	const rowsPerPage = 10;
 	let currentPage = 1;
 	let first = 0;
 	let last = 10;
+	let totalRecords = $storeRows.length; // Calcul du nombre total de records */
+
+	// Le texte de recherche, sous forme d'expression régulière
+	let filterRegex: RegExp;
 
 	/* Logique pour que la sélection des lignes reste cohérente lors du filtrage des résultats */
-	$: displayedIndices = $displayedRows.map((_: any, i: number) => first + i);
-	$: visibleSelected = $displayedRows.map(
-		(row: any) => $selectedRows.find((selectedRow: any) => selectedRow.id === row.id) !== undefined
-	);
-	$: allVisibleSelected = $displayedRows.length > 0 && visibleSelected.every(Boolean);
-	$: {
-		if (
-			allVisibleSelected &&
-			!$selectedRows.some((selectedRow: any) => displayedIndices.indexOf(selectedRow.id) === -1)
-		) {
-			const selectedIds = $selectedRows.map((row: any) => row.id);
-			const newSelection: any = [
-				...selectedIds,
-				...displayedIndices.filter((index: number) => selectedIds.indexOf(index) === -1)
-			];
-			selectedRows.set(newSelection.map((id: number) => rows.find((row: any) => row.id === id)));
-		}
-		if (
-			!allVisibleSelected &&
-			$selectedRows.some((selectedRow: any) => displayedIndices.indexOf(selectedRow.id) !== -1)
-		) {
-			const selectedIds = $selectedRows.map((row: any) => row.id);
-			const newSelection: any = selectedIds.filter((id: number) => displayedIndices.indexOf(id) === -1);
-			selectedRows.set(newSelection.map((id: any) => rows.find((row: any) => row.id === id)));
-		}
-	}
-
-	let filterRegex: RegExp; // Le texte de recherche, sous forme d'expression régulière
+	$: allVisibleSelected =
+		$selectedRows.length > 0 &&
+		$displayedRows.map((row: any) => $selectedRows.find((r: any) => r.id === row.id) !== undefined).every(Boolean);
 
 	// Cette fonction gère la sélection/désélection de toutes les lignes affichées
 	function toggleAll() {
@@ -63,23 +38,31 @@
 		}
 	}
 
-	// Cette fonction gère la sélection/désélection d'une ligne, en fonction de son indice
-	function toggleSelected(rowIndex: number) {
-		const selectedItem: any = $displayedRows[rowIndex];
-
-		selectedRows.update((selected: any) => {
-			const isPresent = selected.map((o: any) => o.id).includes(selectedItem.id);
-			if (isPresent) {
-				return selected.filter((o: any) => o.id !== selectedItem.id);
+	// Cette fonction gère la sélection/désélection d'une ligne, en fonction de son id
+	function toggle(row: any) {
+		return toggleSelected(row.id);
+	}
+	function toggleSelected(rowId: string) {
+		// Mise à jour de la sélection
+		selectedRows.update((rows: any) => {
+			const row = rows.find((item: any) => item.id === rowId);
+			if (row) {
+				// retire
+				return rows.filter((o: any) => o.id !== rowId);
 			} else {
-				return [...selected, selectedItem];
+				// ajoute
+				return [...rows, $displayedRows.find((item: any) => item.id === rowId)];
 			}
 		});
 	}
 
+	afterUpdate(() => {
+		displayRows();
+	});
+
 	// Cette fonction gère l'affichage des lignes, en fonction des critères de filtrage et de pagination
 	function displayRows() {
-		let filteredRows = rows.filter((row) => {
+		let filteredRows = $storeRows.filter((row) => {
 			return Object.values(row).join().match(filterRegex);
 		});
 
@@ -102,17 +85,17 @@
 		displayedRows.set(filteredRows.slice(first, last));
 	}
 
-	export let storeRows: Writable<[]>;
-	storeRows.subscribe((values: []) => {
-		rows = values;
-		displayRows();
+	let init = true;
+	storeRows.subscribe((values: any[]) => {
+		// if (init) displayRows();
+
+		init = false;
 	});
 
 	// Cette fonction gère le passage à la page suivante de la pagination
 	function nextPage() {
-		if (currentPage < Math.ceil(rows.length / rowsPerPage)) {
+		if (currentPage < Math.ceil($storeRows.length / rowsPerPage)) {
 			currentPage++;
-			displayRows();
 		}
 	}
 
@@ -120,7 +103,6 @@
 	function previousPage() {
 		if (currentPage > 1) {
 			currentPage--;
-			displayRows();
 		}
 	}
 
@@ -134,7 +116,7 @@
 
 	// Cette fonction vérifie si une ligne est sélectionnée
 	function isSelected(row: any) {
-		return $selectedRows.some((r: any) => r.id === row.id);
+		return $selectedRows.map((r) => r.id).includes(row.id);
 	}
 
 	onDestroy(() => {
@@ -157,7 +139,7 @@
 			<span class="page-item {currentPage === 1 ? 'disabled' : ''}">
 				<button class="page-link" on:click={previousPage}>{translate('datatable.previous')}</button>
 			</span>
-			<span class="page-item {currentPage === Math.ceil(rows.length / rowsPerPage) ? 'disabled' : ''}">
+			<span class="page-item {currentPage === Math.ceil($storeRows.length / rowsPerPage) ? 'disabled' : ''}">
 				<button class="page-link" on:click={nextPage}>{translate('datatable.next')}</button>
 			</span>
 		</div>
@@ -201,6 +183,9 @@
 {#if $displayedRows.length === 0}
 	<img class="d-none d-md-block" alt="no data" src="images/no_data.jpg" width="100%" height="100%" />
 {:else}
+	selectedRows: {$selectedRows.map((o) => o.id)}<br />
+	displayedRows : {$displayedRows.map((o) => o.id)}<br />
+
 	<div class="table-responsive-md">
 		<div class="col-12">
 			<table class="table table-striped table-hover table-sm has-checkbox">
@@ -227,24 +212,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#each $displayedRows as row, rowIndex}
+					{#each $displayedRows as row (row.id)}
 						<tr>
-							<td>
-								<div class="form-check">
+							<td style="    max-width: 5rem;">
+								<div class="form-check form-switch">
 									<input
+										aria-label="Select row {row.id}"
 										class="form-check-input"
 										type="checkbox"
-										id="check{rowIndex}"
-										checked={$selectedRows.map((r) => r.id).includes(row.id)}
-										on:change={() => toggleSelected(rowIndex)}
+										role="switch"
+										id="check{row.id}"
+										checked={isSelected(row)}
+										on:change={() => toggle(row)}
 									/>
-
-									<label class="form-check-label" for="check{rowIndex}">
-										<span class="visually-hidden">Select row {rowIndex}</span>
-									</label>
 								</div>
+								
 							</td>
-							{#each headers as header, i}
+							{#each headers as header}
 								<td>{row[header.key ?? header]}</td>
 							{/each}
 						</tr>

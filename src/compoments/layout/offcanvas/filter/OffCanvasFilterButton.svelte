@@ -1,4 +1,5 @@
 <script lang="ts">
+	
 	export let controls = 'offcanvasWithBothOptions';
 	export let totalSize = 0;
 	export let selectedSize = 0;
@@ -8,6 +9,7 @@
 	export let title: string;
 	export let sublabel = '';
 </script>
+
 
 <button
 	style=""

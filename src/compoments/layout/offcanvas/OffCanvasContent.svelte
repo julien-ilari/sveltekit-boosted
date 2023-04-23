@@ -45,6 +45,7 @@
 <div
 	bind:this={offcanvas}
 	{id}
+	data-bs-backdrop="static"
 	class="mt-5 offcanvas offcanvas-{position}"
 	data-bs-scroll="false"
 	tabindex="-1"
