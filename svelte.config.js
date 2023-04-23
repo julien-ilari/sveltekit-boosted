@@ -19,6 +19,10 @@ const config = {
 
 		// Ajoutez vos options de configuration ici
 	},
+	compilerOptions: {
+		// Options de compilation pour Svelte
+		customElement: false
+	},
 
 	// Désactiver la protection CSRF
 	csrf: false,
