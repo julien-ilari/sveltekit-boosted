@@ -8,15 +8,23 @@
 	export let storeRows: Writable<any[]> = writable([]); // Toutes les lignes
 	export let selectedRows: Writable<any[]> = writable([]); // Les lignes actuellement sélectionnées
 	export let displayedRows: Writable<Array<any>> = writable([]); // Les lignes actuellement affichées
+	let filteredRows: any[] = [];
 
 	const rowsPerPage = 10;
-	let currentPage = 1;
+	$: currentPage = 1;
 	let first = 0;
 	let last = 10;
-	let totalRecords = $storeRows.length; // Calcul du nombre total de records */
+	$: totalRecords = $storeRows.length; // Calcul du nombre total de records */
 
 	// Le texte de recherche, sous forme d'expression régulière
 	let filterRegex: RegExp;
+	$: if (filterRegex) {
+		displayRows();
+	}
+
+	afterUpdate(() => {
+		displayRows();
+	});
 
 	/* Logique pour que la sélection des lignes reste cohérente lors du filtrage des résultats */
 	$: allVisibleSelected =
@@ -56,13 +64,9 @@
 		});
 	}
 
-	afterUpdate(() => {
-		displayRows();
-	});
-
 	// Cette fonction gère l'affichage des lignes, en fonction des critères de filtrage et de pagination
 	function displayRows() {
-		let filteredRows = $storeRows.filter((row) => {
+		filteredRows = $storeRows.filter((row) => {
 			return Object.values(row).join().match(filterRegex);
 		});
 
@@ -111,7 +115,7 @@
 		let filterValue = event?.target?.value.replace(/\*/g, '.*').replace(/\|/g, '|') ?? '';
 		filterRegex = new RegExp(filterValue, 'i');
 		currentPage = 1;
-		displayRows();
+		// displayRows();
 	}
 
 	// Cette fonction vérifie si une ligne est sélectionnée
@@ -134,58 +138,51 @@
 </script>
 
 <div class="p-0">
-	<nav aria-label="buttons navigation datatable">
-		<div class="pagination m-0">
-			<span class="page-item {currentPage === 1 ? 'disabled' : ''}">
-				<button class="page-link" on:click={previousPage}>{translate('datatable.previous')}</button>
-			</span>
-			<span class="page-item {currentPage === Math.ceil($storeRows.length / rowsPerPage) ? 'disabled' : ''}">
-				<button class="page-link" on:click={nextPage}>{translate('datatable.next')}</button>
-			</span>
+	<div class="d-flex mb-2">
+		<nav aria-label="buttons navigation datatable">
+			<div class="pagination m-0">
+				<span class="page-item {currentPage <= 1 ? 'disabled' : ''}">
+					<button class="page-link" on:click={previousPage}>{translate('datatable.previous')}</button>
+				</span>
+				<span class="page-item {currentPage >= Math.ceil(filteredRows.length / rowsPerPage) ? 'disabled' : ''}">
+					<button class="page-link" on:click={nextPage}>{translate('datatable.next')}</button>
+				</span>
+			</div>
+		</nav>
+
+		<div>
+			<button type="button" class="btn btn-link" on:click={() => selectedRows.set([])}>Clear Selection</button>
+
+			<button on:click={dispatchSelectEvent} class="btn btn-primary">Valider Sélection</button>
+			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" style="position: absolute;top: 0;right:0px">
+				<span class="visually-hidden">Close</span>
+			</button>
 		</div>
-	</nav>
-
-	<div class="my-2">
-		<button type="button" class="btn btn-link" on:click={() => selectedRows.set([])}>Clear Selection</button>
-
-		<button
-			class="btn btn-link"
-			data-bs-toggle="offcanvas"
-			data-bs-target="#offcanvasGlobalFilterSelected"
-			aria-controls="offcanvasGlobalFilterSelected">Voir Sélection</button
-		>
-
-		<button
-			on:click={dispatchSelectEvent}
-			data-bs-toggle="offcanvas"
-			data-bs-target="#offcanvasGlobalFilterSelected"
-			aria-controls="offcanvasGlobalFilterSelected"
-			class="btn btn-primary">Valider Sélection</button
-		>
 	</div>
 
-	<div>
+	<fieldset disabled={$storeRows.length === 0 ? true : false}>
 		<input
 			type="text"
-			class="form-control"
+			class="form-control "
 			aria-label={translate('datatable.search')}
 			placeholder="{translate('datatable.search')}..."
 			on:input={updateFilter}
 		/>
 		<p>
-			{translate('datatable.display')
-				.replace('%1', `${first}`)
-				.replace('%2', `${last}`)
-				.replace('%3', `${totalRecords}`)}
+			{#if $displayedRows.length > 0}
+				{translate('datatable.display')
+					.replace('%1', `${first + 1}`)
+					.replace('%2', `${last}`)
+					.replace('%3', `${totalRecords}`)}
+			{:else}
+				Pas de données à afficher
+			{/if}
 		</p>
-	</div>
+	</fieldset>
 </div>
 {#if $displayedRows.length === 0}
-	<img class="d-none d-md-block" alt="no data" src="images/no_data.jpg" width="100%" height="100%" />
+	<img class="d-none d-md-block" alt="no data" src="images/no_data.jpg" width="100%" height="400pt" />
 {:else}
-	selectedRows: {$selectedRows.map((o) => o.id)}<br />
-	displayedRows : {$displayedRows.map((o) => o.id)}<br />
-
 	<div class="table-responsive-md">
 		<div class="col-12">
 			<table class="table table-striped table-hover table-sm has-checkbox">
@@ -226,7 +223,6 @@
 										on:change={() => toggle(row)}
 									/>
 								</div>
-								
 							</td>
 							{#each headers as header}
 								<td>{row[header.key ?? header]}</td>

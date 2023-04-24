@@ -42,22 +42,13 @@
 	});
 </script>
 
-<div
-	bind:this={offcanvas}
-	{id}
-	data-bs-backdrop="static"
-	class="mt-5 offcanvas offcanvas-{position}"
-	data-bs-scroll="false"
-	tabindex="-1"
->
+<div bind:this={offcanvas} {id} class="mt-3 offcanvas offcanvas-{position}" data-bs-scroll="false" tabindex="-1">
+	<slot name="offcanvas-header" />
 	<div class="offcanvas-header">
 		<header class="w-100">
 			<o-title-bar>
 				<h1>{title}</h1>
 			</o-title-bar>
-			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" style="position: absolute;top: 0;right:0px">
-				<span class="visually-hidden">Close</span>
-			</button>
 		</header>
 	</div>
 	<div class="offcanvas-body">
@@ -69,20 +60,26 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
+	@import 'src/scss/variables.scss';
 	.offcanvas {
+		position: fixed;
+		top: $margin-top;
 		border-top-width: 12px;
 		border-style: solid;
-		border-color: var(--bs-primary);
+		border-color: $primary;
 		width: 50%;
-	}
-	.charging {
-		width: 40px;
-		height: 40px;
-		border: 10px solid rgb(206, 34, 34);
-		border-top-color: rgb(235, 226, 226);
-		border-radius: 50%;
-		animation: spin 0.8s linear infinite;
+
+		.offcanvas-body {
+			.charging {
+				width: 40px;
+				height: 40px;
+				border: 10px solid rgb(206, 34, 34);
+				border-top-color: rgb(235, 226, 226);
+				border-radius: 50%;
+				animation: spin 0.8s linear infinite;
+			}
+		}
 	}
 
 	@keyframes spin {
@@ -97,7 +94,6 @@
 	@media screen and (max-width: 1024px) {
 		[id*='offcanvas'] {
 			/* width: 100vw !important; */
-
 			/* height: 85vh !important; */
 			max-height: 90vh;
 			min-width: 90vh;
@@ -109,6 +105,7 @@
 			/* height: 90vh !important; */
 			max-height: 90vh;
 			min-width: 90vh;
+			right: 1rem;
 		}
 	}
 </style>

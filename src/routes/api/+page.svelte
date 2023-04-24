@@ -7,6 +7,7 @@
 	import DataTable from '@/compoments/common/table/DataTable.svelte';
 	import axios from 'axios';
 	import { writable, type Writable } from 'svelte/store';
+	import SelectionFilter from '@/compoments/layout/offcanvas/filter/SelectionFilter.svelte';
 
 
 
@@ -188,6 +189,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="col-12">
 		<CardSimple title="Données">
 			<DataTable

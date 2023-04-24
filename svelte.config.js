@@ -1,10 +1,17 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import { vitePreprocess } from '@sveltejs/kit/vite';
 
 /** @type {import('@sveltejs/kit').Config}*/
 const config = {
-	preprocess: preprocess(),
-
+	preprocess: [
+		vitePreprocess({
+			scss: {
+				prependData: `@import './src/scss/styles.scss';`
+			}
+		}),
+		preprocess()
+	],
 	kit: {
 		adapter: adapter({
 			pages: 'build',

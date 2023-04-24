@@ -1,0 +1,27 @@
+// Option B: Include parts of Bootstrap
+// @import '~boosted/scss/mixins/banner';
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+@import '~boosted/scss/functions';
+
+// End mod
+
+
+// 3. Include remainder of required Boosted stylesheets
+@import '~boosted/scss/variables';
+
+// 2. Include any default variable overrides here
+// $primary: #754f07;
+// $secondary: #81c90d;
+// $theme-colors: (
+//   "primary": #007bff,
+//   "secondary": #6c757d,
+//   "success": #28a745,
+//   "danger": #dc3545,
+//   "warning": #ffc107,
+//   "info": #17a2b8,
+//   "light": #f8f9fa,
+//   "dark": #343a40
+// );
+
+$margin-top : 30pt;

@@ -12,14 +12,13 @@ export default {
 			})
 		})
 	],
-
 	resolve: {
 		alias: {
-			'@': path.resolve('/src'),
+			'@': path.resolve('src'),
 			'~boosted': path.resolve(__dirname, 'node_modules/boosted')
 		}
 	},
-
+	// root: path.resolve(__dirname, 'src'),
 	server: {
 		port: 4000,
 		hot: true

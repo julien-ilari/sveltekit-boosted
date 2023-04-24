@@ -6,7 +6,8 @@
 	<slot />
 </div>
 
-<style>
+<style lang="scss">
+	
 	.container-offcanvas
 	{
 		max-width: 100%;

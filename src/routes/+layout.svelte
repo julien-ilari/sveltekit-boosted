@@ -1,20 +1,34 @@
+<script context="module">
+	// import App from './App.svelte';
+	export const handle = async ({ request, resolve }) => {
+		const response = await resolve(request);
+
+		if (response) {
+			response.headers['Cache-Control'] = 'max-age=0, s-maxage=1';
+		}
+
+		return response;
+	};
+</script>
+
 <script>
 	// Import our custom CSS
-	import '../scss/styles.scss';
 	import '@fortawesome/fontawesome-free/css/all.min.css';
-
+	import '../scss/styles.scss';
 	// Import all of Boosted's JS
 	import * as boosted from 'boosted';
 
-	import '../lib/elements/o-title-bar.js';
-	import '../lib/elements/o-input.js';
-	import '../lib/elements/ocean-logo.js';
-	import '../lib/elements/o-navbar.js';
-	import '../lib/elements/o-footer-legal-links.js';
-	import '../lib/elements/o-header.js';
+	import '$lib/elements/o-title-bar.js';
+	import '$lib/elements/o-input.js';
+	import '$lib/elements/ocean-logo.js';
+	import '$lib/elements/o-navbar.js';
+	import '$lib/elements/o-footer-legal-links.js';
+	import '$lib/elements/o-header.js';
 
-	import Footer from '../compoments/layout/Footer.svelte';
-	import Header from '../compoments/layout/Header.svelte';
+	import Footer from '@/compoments/layout/Footer.svelte';
+	import Header from '@/compoments/layout/Header.svelte';
+
+	// Code JavaScript pour gérer les paramètres et les données globales de l'application
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -26,14 +40,17 @@
 	</symbol>
 </svg>
 
-
 <Header />
 
-<main class="bd-content order-1 mt-5">
+<main class="bd-content order-1 px-3 pt-4 ">
 	<slot />
 </main>
 
 <Footer />
 
-<style>
+<style lang="scss">
+	@import 'src/scss/variables.scss';
+	main{
+		margin-top : $margin-top;
+	}
 </style>
