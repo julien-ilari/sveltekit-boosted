@@ -21,6 +21,8 @@ const data: Array<I18n> = [
 	{ key: 'to', values: { fr: 'à', en: 'to' } },
 	{ key: 'of', values: { fr: 'sur', en: 'of' } },
 
+	{ key: 'action.validate', values: { fr: 'valider', en: 'validate' } },
+
 	{ key: 'datatable.previous', values: { fr: 'précédent', en: 'previous' } },
 	{ key: 'datatable.next', values: { fr: 'suivant', en: 'next' } },
 	{ key: 'datatable.search', values: { fr: 'rechercher', en: 'search' } },

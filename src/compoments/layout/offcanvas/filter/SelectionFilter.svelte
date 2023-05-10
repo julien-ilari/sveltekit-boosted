@@ -10,6 +10,7 @@
 	onMount(() => {
 		wrapper.classList.toggle('move');
 		content.classList.toggle('visible');
+		label.classList.toggle('move');
 	});
 
 	onDestroy(() => {
@@ -18,8 +19,6 @@
 
 	const toggleSelection = () => {
 		wrapper.classList.toggle('move');
-
-		label.classList.toggle('label-move');
 
 		if (!isSelected) {
 			label.classList.add('text-bg-primary');
@@ -42,7 +41,7 @@
 	</div>
 
 	<div bind:this={wrapper} class="wrapper move" style="width: 100%;">
-		<header class="p-2 px-3 ">
+		<header class="p-2 px-3">
 			<o-title-bar>
 				<h1>Récapitulatif de la sélection</h1>
 			</o-title-bar>
@@ -54,7 +53,7 @@
 	</div>
 </div>
 
-<style>
+<style global>
 	.content {
 		visibility: hidden;
 		display: none;
@@ -96,6 +95,11 @@
 		transform-origin: bottom right;
 		transform: rotate(-90deg);
 		transition: all 0.3s ease-in-out;
+		display: none;
+	}
+
+	.offcanvas.show .label {
+		display: block;
 	}
 
 	.wrapper.move {

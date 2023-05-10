@@ -2,14 +2,12 @@
 	import { httpStoreOcean } from '$lib/stores/storeOceanApi';
 	import { onMount } from 'svelte';
 	import Input from '@/compoments/common/forms/Input.svelte';
-	import CardSimple from '@/compoments/common/card/SimpleCard.svelte';
 	import { addEntitiesVehiclesDrivers, openDB, vehicleStore } from '$lib/stores/storeIndexedDB';
+
 	import DataTable from '@/compoments/common/table/DataTable.svelte';
 	import axios from 'axios';
 	import { writable, type Writable } from 'svelte/store';
-	import SelectionFilter from '@/compoments/layout/offcanvas/filter/SelectionFilter.svelte';
-
-
+	import JsonViewCard from '@/compoments/pages/api/JsonViewCard.svelte';
 
 	$: server = 'https://v3.oceansystem.com/ocean/restapi';
 	$: swagger = `${server}/apidocs`;
@@ -48,14 +46,8 @@
 	}
 
 	$: httpStore = httpStoreOcean(server);
-	$: if (server) {
-		httpStore.subscribe((responseData: any) => {
-			if (!isEmpty(responseData) && !responseData.token) {
-				console.log(responseData);	
-				data.set(responseData);
-				addEntitiesVehiclesDrivers(responseData);
-			}
-		});
+	$: if (httpStore) {
+		
 	}
 
 	function isEmpty(obj: Object) {
@@ -83,7 +75,7 @@
 	async function handleSearchPositions() {
 		const success = await httpStore.action(
 			'get',
-			'positions/search?byStorageDate=false' +
+			'/positions/search?byStorageDate=false' +
 				'&customerId=' +
 				customerId +
 				'&immatriculation=' +
@@ -123,7 +115,6 @@
 	};
 
 	onMount(() => {
-
 		openDB(customerId.toString());
 		const store: Writable<[]> = vehicleStore;
 		store.subscribe((value) => {
@@ -131,6 +122,14 @@
 		});
 
 		initSwaggerClient();
+
+		httpStore.subscribe((responseData: any) => {
+			if (!isEmpty(responseData) && !responseData.token) {
+				data.set(responseData);
+
+				addEntitiesVehiclesDrivers(responseData);
+			}
+		});
 	});
 </script>
 
@@ -190,23 +189,10 @@
 		</div>
 	</div>
 
-	<div class="col-12">
-		<CardSimple title="Données">
-			<DataTable
-				headers={[
-					'id',
-					'numeroEmbarque',
-					'modele',
-					'marque',
-					{ label: 'type', key: 'libelleTypeAsset' },
-					'immatriculation',
-					'typeMotorisation',
-					'categorie'
-				]}
-				storeRows={data}
-			/>
-		</CardSimple>
-	</div>
+	<!-- <div class="col-12">
+		<JsonViewCard data={$data} />
+		{JSON.stringify($data)}
+	</div> -->
 </div>
 
 <style>

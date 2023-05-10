@@ -153,7 +153,7 @@
 		<div>
 			<button type="button" class="btn btn-link" on:click={() => selectedRows.set([])}>Clear Selection</button>
 
-			<button on:click={dispatchSelectEvent} class="btn btn-primary">Valider Sélection</button>
+			<button on:click={dispatchSelectEvent} class="btn btn-primary">{translate('action.validate')}</button>
 			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" style="position: absolute;top: 0;right:0px">
 				<span class="visually-hidden">Close</span>
 			</button>

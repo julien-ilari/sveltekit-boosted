@@ -112,8 +112,6 @@ export function addEntitiesVehiclesDrivers(items: any[]) {
 	let dboEntityStore = getObjectStore(ENTITY_STORE);
 	let dboVehicletore = getObjectStore(VEHICLE_STORE);
 	let dboDriverStore = getObjectStore(DRIVER_STORE);
-	console.log('items');
-	console.log(items);
 
 	// update the local storage
 	for (let item of items) {

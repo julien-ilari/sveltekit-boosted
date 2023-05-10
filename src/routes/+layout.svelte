@@ -17,7 +17,6 @@
 	import '../scss/styles.scss';
 	// Import all of Boosted's JS
 	import * as boosted from 'boosted';
-
 	import '$lib/elements/o-title-bar.js';
 	import '$lib/elements/o-input.js';
 	import '$lib/elements/ocean-logo.js';
@@ -42,7 +41,7 @@
 
 <Header />
 
-<main class="bd-content order-1 px-3 pt-4 ">
+<main class="bd-content order-1 px-3 pt-4">
 	<slot />
 </main>
 
@@ -50,7 +49,7 @@
 
 <style lang="scss">
 	@import 'src/scss/variables.scss';
-	main{
-		margin-top : $margin-top;
+	main {
+		margin-top: $margin-top;
 	}
 </style>

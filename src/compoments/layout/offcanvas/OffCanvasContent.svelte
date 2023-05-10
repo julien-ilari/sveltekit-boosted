@@ -91,21 +91,5 @@
 		}
 	}
 
-	@media screen and (max-width: 1024px) {
-		[id*='offcanvas'] {
-			/* width: 100vw !important; */
-			/* height: 85vh !important; */
-			max-height: 90vh;
-			min-width: 90vh;
-		}
-	}
-	@media screen and (min-width: 1025px) {
-		[id*='offcanvas'] {
-			/* width: 100vw !important; */
-			/* height: 90vh !important; */
-			max-height: 90vh;
-			min-width: 90vh;
-			right: 1rem;
-		}
-	}
+	
 </style>
