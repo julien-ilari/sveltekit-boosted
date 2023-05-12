@@ -25,7 +25,7 @@
 			{ label: translate('fleet.vehicle.immat'), key: 'immatriculation' },
 			{ label: translate('fleet.vehicle.desc'), key: 'description' },
 			{ label: translate('fleet.vehicle.motorisation.type'), key: 'typeMotorisation' },
-			{ label: translate('fleet.vehicle.category'), key: 'categorieVehiculeEcoConduite	' }
+			{ label: translate('fleet.vehicle.category'), key: 'categorieVehiculeEcoConduite' }
 		]
 	};
 

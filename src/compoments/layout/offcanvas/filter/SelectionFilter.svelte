@@ -65,8 +65,7 @@
 	}
 
 	.wrapper {
-		height: 100vh;
-		max-height: 88.5vh;
+		height: 100%;
 		float: right;
 		transition: all 0.3s ease-in-out;
 		position: absolute;

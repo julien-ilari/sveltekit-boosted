@@ -1,6 +1,6 @@
 <script lang="ts">
 	import translate from '@/lib/utils/translate';
-	import { onDestroy, createEventDispatcher, beforeUpdate, afterUpdate, onMount } from 'svelte';
+	import { onDestroy, createEventDispatcher, afterUpdate } from 'svelte';
 	import { writable, type Writable } from 'svelte/store';
 
 	export let headers: [{ label: string; key: string }] | any; // Les en-têtes de colonnes de la table
@@ -90,7 +90,7 @@
 	}
 
 	let init = true;
-	storeRows.subscribe((values: any[]) => {
+	storeRows.subscribe((_values: any[]) => {
 		// if (init) displayRows();
 
 		init = false;
@@ -163,7 +163,7 @@
 	<fieldset disabled={$storeRows.length === 0 ? true : false}>
 		<input
 			type="text"
-			class="form-control "
+			class="form-control"
 			aria-label={translate('datatable.search')}
 			placeholder="{translate('datatable.search')}..."
 			on:input={updateFilter}

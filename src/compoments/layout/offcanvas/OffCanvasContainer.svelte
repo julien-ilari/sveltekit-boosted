@@ -7,10 +7,7 @@
 </div>
 
 <style lang="scss">
-	
-	.container-offcanvas
-	{
+	.container-offcanvas {
 		max-width: 100%;
 	}
-	
 </style>

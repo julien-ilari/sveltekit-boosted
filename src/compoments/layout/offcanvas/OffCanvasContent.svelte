@@ -22,12 +22,6 @@
 			});
 		});
 
-		const dispatchOptions = {
-			id,
-			hide: false,
-			show: true
-		};
-
 		offcanvas.addEventListener('shown.bs.offcanvas', () => {
 			// Transmettre l'événement à un composant parent
 			dispatch('notify', {
@@ -68,7 +62,6 @@
 		border-top-width: 12px;
 		border-style: solid;
 		border-color: $primary;
-		width: 50%;
 
 		.offcanvas-body {
 			.charging {
@@ -82,6 +75,18 @@
 		}
 	}
 
+	@media (max-width: 1200px) {
+		.offcanvas {
+			width: 100%;
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.offcanvas {
+			width: 50%;
+		}
+	}
+
 	@keyframes spin {
 		0% {
 			transform: rotate(0deg);
@@ -90,6 +95,4 @@
 			transform: rotate(360deg);
 		}
 	}
-
-	
 </style>

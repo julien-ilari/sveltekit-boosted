@@ -29,13 +29,10 @@
 
 	export let items = [
 		{ to: '/', value: 'Dashboard' },
+		{ to: '/products', value: 'Catalogue' },
 		{ to: '/api', value: 'API' },
 		{ to: '/parameters/filters', value: 'Paramètres' }
 	];
-
-	function quintOut(t: number): number {
-		throw new Error('Function not implemented.');
-	}
 </script>
 
 <header class="fixed-top" style="z-index:9999">
