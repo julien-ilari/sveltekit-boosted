@@ -190,8 +190,6 @@
 						<Input col="3" label="date début" bind:value={dateDebut} />
 						<Input col="3" label="date fin" bind:value={dateFin} />
 					</div>
-
-					
 				</div>
 			</div>
 			<div class="mt-2 mb-2">

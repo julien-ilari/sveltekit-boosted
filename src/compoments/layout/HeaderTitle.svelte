@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let icomoon: string;
+	export let icomoon: string | undefined = undefined;
 	export let title: string;
 </script>
 

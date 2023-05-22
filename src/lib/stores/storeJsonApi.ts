@@ -55,7 +55,7 @@ export function genericHttpStore<T>(baseUrl: string): HttpStore<T> {
 			throw new Error(`Invalid config: ${config}`);
 		}
 		try {
-			const response = await axios[method](`${baseUrl}/${path}`, config);
+			const response = await axios[method](`${baseUrl}${path}`, config);
 			store.set(response.data);
 			return true;
 		} catch (error: any) {

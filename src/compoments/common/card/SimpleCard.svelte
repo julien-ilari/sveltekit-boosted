@@ -1,14 +1,16 @@
 <script>
-	export let title = 'Unknown title';
+	export let title = undefined;
 	export let cssClass = '';
 	export let bodyColor = '';
 </script>
 
 <article class="card mb-2">
 	<div class="card-header">
-		<h3 style="margin:0" class="display-5">
-			{title}
-		</h3>
+		<slot name="header">
+			<h3 class="m-0 display-5">
+				{title}
+			</h3>
+		</slot>
 	</div>
 
 	<div class="card-body p-2 {cssClass} bg-{bodyColor}">

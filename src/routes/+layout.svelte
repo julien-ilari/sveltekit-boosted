@@ -1,16 +1,3 @@
-<script context="module">
-	// import App from './App.svelte';
-	export const handle = async ({ request, resolve }) => {
-		const response = await resolve(request);
-
-		if (response) {
-			response.headers['Cache-Control'] = 'max-age=0, s-maxage=1';
-		}
-
-		return response;
-	};
-</script>
-
 <script>
 	// Import our custom CSS
 	import '@fortawesome/fontawesome-free/css/all.min.css';

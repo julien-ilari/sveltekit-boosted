@@ -1,4 +1,4 @@
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
 import { vitePreprocess } from '@sveltejs/kit/vite';
 
@@ -18,13 +18,16 @@ const config = {
 			assets: 'build',
 			fallback: null,
 			precompress: true,
-			strict: true,
-			prerender: {
-				enabled: false
-			}
-		})
+			strict: true
+			// prerender: {
+			// 	enabled: false
+			// }
+		}),
 
 		// Ajoutez vos options de configuration ici
+		prerender: {
+			entries: ['/products']
+		}
 	},
 	compilerOptions: {
 		// Options de compilation pour Svelte

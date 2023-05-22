@@ -89,13 +89,6 @@
 		displayedRows.set(filteredRows.slice(first, last));
 	}
 
-	let init = true;
-	storeRows.subscribe((_values: any[]) => {
-		// if (init) displayRows();
-
-		init = false;
-	});
-
 	// Cette fonction gère le passage à la page suivante de la pagination
 	function nextPage() {
 		if (currentPage < Math.ceil($storeRows.length / rowsPerPage)) {

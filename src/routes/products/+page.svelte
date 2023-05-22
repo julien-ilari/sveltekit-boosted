@@ -1,34 +1,25 @@
 <script lang="ts">
-	import JsonViewCard from './../../compoments/common/card/JsonViewCard.svelte';
-	import SimpleCard from "@/compoments/common/card/SimpleCard.svelte";
-    import { httpStoreOcean, type HttpStoreOcean } from '$lib/stores/storeOceanApi';
-	import { onMount } from "svelte";
-    let httpStore: HttpStoreOcean;
+	import translate from '$lib/utils/translate';
+	import HeaderTitle from '@/compoments/layout/HeaderTitle.svelte';
+	import Article from '@/compoments/shop/Article.svelte';
 
-    let data :[];
-    httpStore = httpStoreOcean('https://api.web-maker.fr');
-    httpStore.subscribe((responseData: any) => {
-        data = responseData;
-    });
+	export let data: any;
 
-    onMount(() => {
-        httpStore.action('get', '/products')
-    })
-
+	const items = data.products;
+	const i18n = data.i18n;
 </script>
 
-<o-title-bar>
-	<h1 class="display-4">Catalogue</h1>
-</o-title-bar>
+<HeaderTitle title={translate('page.title', i18n)} />
 
-<h2>Gestion des produits</h2>
-<SimpleCard title="products">
-   <JsonViewCard data={data}></JsonViewCard>
-</SimpleCard>
-
-<h2>Gestion des catégories</h2>
-<SimpleCard title="categories">
-
-    
-</SimpleCard>
-
+{#if items?.length > 0}
+	<div class="d-flex flex-wrap">
+		{#each items as item (item._id)}
+			<Article id={item._id} title={item.name} summary={item.description} price="{item.price}€" img={item.image} />
+		{/each}
+	</div>
+{:else if items === undefined}
+	<span>
+		{JSON.stringify(items)}
+	</span>
+{/if}
+<br /><br /><br />

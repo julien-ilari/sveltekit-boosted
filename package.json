@@ -18,6 +18,7 @@
 		"@popperjs/core": "^2.11.7",
 		"@sentry/node": "^7.30.0",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-node": "^1.2.4",
 		"@sveltejs/adapter-static": "^2.0.2",
 		"@sveltejs/kit": "next",
 		"@types/crypto-js": "^4.1.1",

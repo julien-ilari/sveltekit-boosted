@@ -33,4 +33,4 @@
 	});
 </script>
 
-<o-footer-legal-links bind:this={footer} copyright="Orange Business Services 2023" {items} />
+<o-footer-legal-links bind:this={footer} copyright="web-maker 2023" {items} />

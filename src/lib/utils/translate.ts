@@ -106,7 +106,6 @@ export default (
 	hasplural: boolean = false,
 	lang: Lang = 'fr'
 ): string => {
-	let format = undefined;
 	let message: string = '#' + key;
 	let plural = hasplural ? 's' : '';
 	if (translations.length != 0) {

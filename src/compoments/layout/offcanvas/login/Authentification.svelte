@@ -6,16 +6,14 @@
 
 	$: login = 'jilari';
 	$: password = '';
-	$: token = '';
 
 	let httpStore = httpStoreOcean('https://v3.oceansystem.com/ocean/restapi');
 	let authenticate = async () => {
 		return await httpStore.action('post', `/auth/authenticate?login=${login}&password=${password}`);
 	};
 
-	let previousValue: [];
 	onMount(() => {
-		httpStore.subscribe((responseData: any, token?: string) => {
+		httpStore.subscribe((_responseData: any, token?: string) => {
 			token = token;
 		});
 	});

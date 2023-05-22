@@ -231,19 +231,21 @@
 		]
 	};
 
-	const listeKO = $vehicleStore.filter((o) => {
-		let val: any = o;
-		return (
-			val.typeMotorisation === 'MONO' &&
-			val.idEnergie !== 10 &&
-			val.idUniteConsommation !== 'UNDEFINED' &&
-			val.idUniteConsommation !== 1 &&
-			val.idUniteConsommation !== 2
-		);
-	}).map((o) => {
-		let val: any = o;
-		return val.immatriculation;
-	});
+	const listeKO = $vehicleStore
+		.filter((o) => {
+			let val: any = o;
+			return (
+				val.typeMotorisation === 'MONO' &&
+				val.idEnergie !== 10 &&
+				val.idUniteConsommation !== 'UNDEFINED' &&
+				val.idUniteConsommation !== 1 &&
+				val.idUniteConsommation !== 2
+			);
+		})
+		.map((o) => {
+			let val: any = o;
+			return val.immatriculation;
+		});
 </script>
 
 <o-title-bar class="title-bar">

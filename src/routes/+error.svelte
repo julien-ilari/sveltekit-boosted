@@ -1,8 +1,12 @@
+<script>
+	import { page } from '$app/stores';
+</script>
+
 <div style="margin:auto;width: 100%;">
 	<div id="background" />
 	<div class="top">
-		<h1>404</h1>
-		<h3>page not found</h3>
+		<h1>{$page.status}</h1>
+		<h3>{$page.error.message}</h3>
 	</div>
 	<div class="container">
 		<div class="ghost-copy">
